@@ -1,5 +1,5 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
+// const exphbs = require('express-handlebars');
 // import sequelize connection
 const sequelize = require('./config/connection.js');
 
