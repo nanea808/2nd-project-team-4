@@ -28,6 +28,8 @@ Item.init(
         type: DataTypes.STRING,
         allowNull: false
     },
+
+    //list owning the item
     list_id: {
       type: DataTypes.INTEGER,
       references: {
