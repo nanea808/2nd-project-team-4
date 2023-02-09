@@ -19,7 +19,7 @@ GroupUser.init(
                 key: 'id'
             }
         },
-        list_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
               model: 'user',
