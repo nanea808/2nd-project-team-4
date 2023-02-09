@@ -37,7 +37,7 @@ Item.belongsTo(List, {
     foreignKey: 'list_id'
 })
 
-// Each user belongs to many groups.
+// Each user belongs to many groups, and each group is assigned to (belongs to) many users.
 User.belongsToMany(Group, {through: 'GroupUser'});
 Group.belongsToMany(User, {through: 'GroupUser'});
 
