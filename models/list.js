@@ -15,6 +15,8 @@ List.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    //user owning the list
     user_id: {
       type: DataTypes.INTEGER,
       references: {
