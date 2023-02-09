@@ -39,8 +39,11 @@ Item.belongsTo(List, {
 
 // Each user belongs to many groups.
 User.belongsToMany(Group, {through: 'GroupUser'});
-// each list belongs to many groups.
+Group.belongsToMany(User, {through: 'GroupUser'});
+
+// each list belongs to many groups, and each group is assigned to (belongs to) many lists.
 List.belongsToMany(Group, {through: 'GroupList'});
+Group.belongsToMany(List, {through: 'GroupList'});
 
 module.exports = {
     Group,
