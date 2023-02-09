@@ -32,4 +32,4 @@ router.get('/:id', async (req,res) => {
     }
 });
 
-module.exports = User;
+module.exports = router;
