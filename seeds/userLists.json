@@ -1,22 +1,18 @@
 [
     {
-        "username":"sarahkh",
-        "password":"testing",
-        "email":"sarah.k.hopper@gmail.com"
+        "title":"sarah's wishlist",
+        "user_id":"1"
     },
     {
-        "username":"reggums",
-        "password":"testing",
-        "email":"reg@gmail.com"
+        "title":"reg's wishlist",
+        "user_id":"2"
     },
     {
-        "username":"daisy",
-        "password":"testing",
-        "email":"daisy@gmail.com"
+        "title":"daisy's wishlist",
+        "user_id":"3"
     },
     {
-        "username":"pearl",
-        "password":"testing",
-        "email":"pearl@gmail.com"
+        "title":"pearl's wishlist",
+        "user_id":"4"
     }
 ]
