@@ -28,10 +28,6 @@ User.init(
                 isEmail: true,
             }
         },
-        group_id: {
-            type: DataTypes.INTEGER,
-            
-        }
     },
     {
         sequelize,
