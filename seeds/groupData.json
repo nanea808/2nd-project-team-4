@@ -1,22 +1,19 @@
 [
     {
         "title":"sarah's bday",
-        "description":"",
-        "user_id":"1"
+        "owning_user_id":"1",
+        "user_id": "2"
     },
     {
         "title":"reg's housewarming",
-        "description":"",
-        "user_id":"2"
+        "owning_user_id":"2"
     },
     {
         "title":"daisy's secret santa party",
-        "description":"",
-        "user_id":"3"
+        "owning_user_id":"3"
     },
     {
         "title":"pearl's gift exchange",
-        "description":"",
-        "user_id":"4"
+        "owning_user_id":"4"
     }
 ]

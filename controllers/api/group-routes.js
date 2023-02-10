@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
             //include: the owner of the group, the members of the group, the lists in each group
             include: [{model: User}, {model: User, through: GroupUser}, {model: List, through: GroupList}]
         });
-        res.status(200).json(GroupData);
+        res.status(200).json(groupData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -24,7 +24,7 @@ router.get('/:id', async (req,res) => {
             res.status(404).json({message: 'No group with that ID.'});
             return;
         }
-        res.status(200).json(userData);
+        res.status(200).json(groupData);
     } catch (err) {
         res.status(500).json(err);
     }
