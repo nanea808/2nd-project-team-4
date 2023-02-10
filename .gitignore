@@ -1,5 +1,0 @@
-.env
-package-lock.json
-.DS_Store
-.vscode
-node_modules
