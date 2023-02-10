@@ -17,16 +17,6 @@ List.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-// Each user has many groups.
-// Each group belongs to one user (one owner).
-User.hasMany(Group, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
-});
-Group.belongsTo(User, {
-    foreignKey: 'user_id'
-});
-
 // Each list has many items.
 // Each item belongs to one list.
 List.hasMany(Item, {
@@ -35,9 +25,20 @@ List.hasMany(Item, {
 });
 Item.belongsTo(List, {
     foreignKey: 'list_id'
-})
+});
 
-// Each user belongs to many groups, and each group is assigned to (belongs to) many users.
+// Each user has many groups.
+// Each group belongs to one user (one owner).
+User.hasMany(Group, {
+    foreignKey: 'owning_user_id',
+    onDelete: 'CASCADE'
+});
+Group.belongsTo(User, {
+    as: 'owner',
+    foreignKey: 'owning_user_id'
+});
+
+// // Each user belongs to many groups, and each group is assigned to (belongs to) many users.
 User.belongsToMany(Group, {through: 'GroupUser'});
 Group.belongsToMany(User, {through: 'GroupUser'});
 
@@ -46,10 +47,10 @@ List.belongsToMany(Group, {through: 'GroupList'});
 Group.belongsToMany(List, {through: 'GroupList'});
 
 module.exports = {
-    Group,
-    Item,
-    List,
     User,
+    List,
+    Item,
+    Group,
     GroupList,
     GroupUser
 };

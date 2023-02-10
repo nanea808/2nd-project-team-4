@@ -5,7 +5,7 @@ const listRoutes = require('./list-routes');
 const userRoutes = require('./user-routes');
 
 router.use('/groups', groupRoutes);
-router.use('/users', itemRoutes);
+router.use('/items', itemRoutes);
 router.use('/lists', listRoutes);
 router.use('/users', userRoutes);
 

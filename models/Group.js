@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Group extends Model {}
@@ -9,12 +9,12 @@ Group.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
 
     //optional
@@ -23,13 +23,13 @@ Group.init(
     },
 
     //user owning the group
-    user_id: {
+    owning_user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id'
       }
-    },
+    }
   },
   {
     sequelize,
