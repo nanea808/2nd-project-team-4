@@ -8,7 +8,11 @@ router.get('/', async (req, res) => {
     try {
         const userData = await User.findAll({
             //include: all lists they own, all groups they're a part of, and all groups they own.
-            include: [{model: List}, {model: Group, through: GroupUser}, {model: Group}]
+            include: [
+                {model: List}, 
+                {model: Group}, 
+                {model: Group, attributes: ['title'], through: {model: GroupUser, attributes: ['group_id', 'user_id'],}}
+            ]
         });
         res.status(200).json(userData);
     } catch (err) {
@@ -19,7 +23,11 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req,res) => {
     try {
         const userData = await User.findByPk(req.params.id, {
-            include: [{model: List}, {model: Group, through: GroupUser}, {model: Group}]
+            include: [
+                {model: List}, 
+                {model: Group},
+                {model: Group, attributes: ['title'], through: {model: GroupUser, attributes: ['group_id', 'user_id'],}}
+            ]
         });
 
         if(!userData) {
