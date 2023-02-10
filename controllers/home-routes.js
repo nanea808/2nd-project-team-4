@@ -1,7 +1,18 @@
 const router = require('express').Router();
+const { User, List, Group, GroupUser, GroupList } = require('../models');
 
 router.get('/', async (req, res) => {
-    res.render('homepage');
+    const user_id = 1;
+    const groupData = await Group.findAll({
+        where: {
+            owning_user_id: user_id
+        }
+    }).catch((err) => {
+        res.json(err);
+    });
+    const groups = groupData.map((group) => group.get({ plain: true }));
+    console.log(groups);
+    res.render('homepage', { groups });
 });
 
 router.get('/group', async (req, res) => {
