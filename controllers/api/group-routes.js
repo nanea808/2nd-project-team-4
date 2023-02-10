@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
             //include: the owner of the group, the members of the group, the lists in each group
             include: [
                 {model: User},
-                {model: User, attributes: ['username'], through: {model: GroupUser, attributes: ['group_id', 'user_id'],}},
-                {model: List, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: User, through: {model: GroupUser}},
+                {model: List, through: {model: GroupList}}
             ]
         });
         res.status(200).json(groupData);
@@ -24,8 +24,8 @@ router.get('/:id', async (req,res) => {
         const groupData = await Group.findByPk(req.params.id, {
             include: [
                 {model: User},
-                {model: User, attributes: ['username'], through: {model: GroupUser, attributes: ['group_id', 'user_id'],}},
-                {model: List, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: User, through: {model: GroupUser}},
+                {model: List, through: {model: GroupList}}
             ]
         });
 

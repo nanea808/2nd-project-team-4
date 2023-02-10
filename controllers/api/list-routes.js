@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
             include: [
                 {model: User}, 
                 {model: Item}, 
-                {model: Group, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: Group, through: {model: GroupList}}
             ]
         });
         res.status(200).json(listData);
@@ -25,7 +25,7 @@ router.get('/:id', async (req,res) => {
             include: [
                 {model: User}, 
                 {model: Item}, 
-                {model: Group, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: Group, through: {model: GroupList}}
             ]
         });
 
