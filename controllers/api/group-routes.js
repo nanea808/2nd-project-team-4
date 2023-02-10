@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const {User, List, Group, GroupUser, GroupList} = require('../../models');
 
-//get on all groups.
+// api/groups endpoint
+
 router.get('/', async (req, res) => {
     try {
         const groupData = await Group.findAll({
@@ -37,5 +38,51 @@ router.get('/:id', async (req,res) => {
         res.status(500).json(err);
     }
 });
+
+//post to create a group
+//not working
+router.post('/', async (req, res) => {
+    /*req.body should look something like this:
+    {
+        title: "something",
+        description: "this is optional",
+        owning_user_id: 1,
+        userIds: [1,2,3,4],
+        listIds: [1.2.4.5]
+    }
+    */
+    Group.create(req.body)
+        .then((group) => {
+            if(req.body.userIds) {
+                const groupUserIdArr = req.body.userIds.map((user_id) => {
+                    return {
+                        group_id: group.id,
+                        user_id
+                    };
+                });
+                GroupUser.bulkCreate(groupUserIdArr);
+            }
+            
+            if(req.body.listIds) {
+                const groupListIdArr = req.body.listIds.map((list_id) => {
+                    return {
+                        group_id: group.id,
+                        list_id
+                    };
+                });
+                GroupList.bulkCreate(groupListIdArr);
+            }
+
+            return true;
+        })
+        .then((results) => res.status(200).json(results))
+        .catch((err) => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+  });
+
+//put to update a group (change name)
+//delete to delete a group
 
 module.exports = router;
