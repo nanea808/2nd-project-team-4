@@ -5,6 +5,15 @@ const sequelize = require('./config/connection.js');
 
 const routes = require('./controllers');
 
+// set up sessions
+const userSess = {
+    secret: 'classified supersecret',
+    resave: false,
+    saveUninitialized: true,
+};
+
+app.use(session(userSess));
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
