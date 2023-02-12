@@ -1,18 +1,37 @@
+
+{{!-- styling version B --}}
+<div class="row justify-space-between-md"> {{! may want to change layout later}}
+    <div class="login-card">
+        <h2 class="page-title">Present Pear Login</h2>
+        <form class="form login-form">
+            <div class="form-group">
+                <label for="email-login">Email:</label>
+                <input class="form-input" type="text" id="email-login" />
+            </div>
+            <div class="form-group">
+                <label for="password-login">Password:</label>
+                <input class="form-input" type="password" id="password-login" />
+            </div>
+        <div class="form-group">
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </div>
+</form>
+
+<script src="../public/js/login.js"></script>
+
+{{!-- styling version A
 <div class="container">
     <div class="card" id="login-card">
-        <div class="card-header">
-            Log In to Present Pear
+        <div class="card-header"> Log In to Present Pear </div>
+            <div class="card-body">
+                <div class="input-group mb-3" id="login-form">
+                    <input type="text" class="form-control" id="username-input" placeholder="username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-text">@example.com</span>
+                    <input type="text" class="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon2">
+                    <span class="input-group-text">password</span>
+                    <button type="button" class="btn btn-primary">Log In</button>                
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            {{!-- <h5 class="card-title"></h5> --}}
-                {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                <label for="formControlInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="formControlInput" placeholder="name@example.com">
-
-                <label for="formControlInput" class="form-label">Password</label>
-                <input type="password" class="form-control" id="formControlInput" placeholder="password">
-
-                {{!-- <a href="#" class="btn btn-primary">Login</a> --}}
-                <button type="button" class="btn btn-primary">Login</button>
-        </div>
-</div>
+    </div>
+</div> -- --}}
