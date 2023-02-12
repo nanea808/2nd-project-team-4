@@ -40,4 +40,43 @@ router.get('/:id', async (req,res) => {
     }
 });
 
+//login
+router.post('/login', async (req, res) => {
+    try {
+        const userData = await User.fineOne({
+            where: {
+                email: req.body.email,
+            },
+        });
+
+        if (!userData) {
+            res
+                .status(400)
+                .json({message: 'Email not found. Please try again.'});
+            return;
+        }
+
+        const validPass = await userData.checkPassword(req.body.password);
+
+        if (!validPass) {
+            res
+            .status(400)
+            .json({message: 'Incorrect password. Please try again.'});
+        return;
+        }
+
+        // set up session when user logs in
+        req.session.save(() => {
+            req.session.loggedIn = true;
+
+            res
+                .status(200)
+                .json({user: userData, message: 'Logged in to Pear Present.'});
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err); //comment out when testing finished
+    }
+});
+
 module.exports = router;
