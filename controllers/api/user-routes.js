@@ -41,6 +41,7 @@ router.get('/:id', async (req,res) => {
 
 // User login routes
 
+// Sign Up
 // post to create a user
 router.post('/', async (req, res) => {
     /*req.body should look something like this:
@@ -64,7 +65,12 @@ router.post('/', async (req, res) => {
             }
             return true;
         })
-        .then((results) => res.status(200).json(results))
+        .then((results) => {
+            req.session.save(() => {
+                req.session.loggedIn = true;
+                res.status(200).json(results);
+              });
+        })
         .catch((err) => {
           console.log(err);
           res.status(400).json(err);
@@ -73,5 +79,9 @@ router.post('/', async (req, res) => {
 
 //put to update a user
 //delete to delete a user
+
+//Login
+
+
 
 module.exports = router;
