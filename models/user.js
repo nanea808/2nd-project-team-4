@@ -19,6 +19,7 @@ User.init(
             }
         },
         password: {
+            allowNull: false,
             type: DataTypes.STRING
         },
         email: {
