@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const {List, Item} = require('../../models');
 
-//get on all items.
+// api/items endpoint
+
 router.get('/', async (req, res) => {
     try {
         const itemData = await Item.findAll({
-            //include: the list the item belongs to
             include: [{model: List}]
         });
         res.status(200).json(itemData);
@@ -29,5 +29,18 @@ router.get('/:id', async (req,res) => {
         res.status(500).json(err);
     }
 });
+
+router.post('/', async (req, res) => {
+    try {
+      const itemData = await Item.create(req.body);
+      res.status(200).json(itemData);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log(err);
+    }
+  });
+
+//put to update an item
+//delete to destroy an item
 
 module.exports = router;
