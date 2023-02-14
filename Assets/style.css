@@ -13,13 +13,13 @@
     font-family: 'Macondo';
 }
 
-body {
-    
-    background-color: rgb(63, 63, 63);
+.body {
+    background-color: rgb(255, 138, 43);
     color: rgb(145, 145, 145);
     border: 1px;
     box-sizing: content-box;
 }
+
 button:hover {
     box-shadow: inset 0px 0px 8px;
 }
@@ -59,7 +59,7 @@ header h1 {
 }
 
 
-header, .saved {
+.header, .saved {
     padding-top: 20px;
     padding: 10px;
     justify-content: right;
@@ -69,56 +69,56 @@ header, .saved {
     padding: 10px;
 }
 
-.container {
+.gift-container {
     padding: 10px;
     max-width: 50%;
-    height: 350px;
+    min-width: 50%;
+    height: 750px;
     display: flex;
     font-weight: bold;
-    gap: 1em;
+    float: left;
+    position: relative;
+    background-color:aqua;
 }
 
 
 .border{
     border: 5px solid rgb(0, 0, 0);
     background-color: var(--Bosc);
-    height: 350px;
+    height: 200px;
     display: flex;
     align-self: flex-start;
 }
 
-.container-description {
-    display: flex;
-    border: 1px;
-    height: 250px;
-    flex-direction: column;
-    justify-content: space-around;
-    
-}
-
-.container-Stats {
-    display: flex;
-    border: 1px;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    height: 350px;
-    align-self: center;;
-}
-
-.container-companion {
-    border: 1px;
-    align-self: center;
-    height: 350px;
-    box-sizing: content-box;
-}
-
-
-#Gen-Btn, #Save-Btn {
+#signUp-btn, #logIn-btn {
     background-color: var(--Bosc);
     color: var(--Bartleft);
     font-weight: bold;
     padding: 20px;
     font-size: 30px;
     border-radius: 7%;
+}
+
+.WTF {
+    color: var(--Bosc);
+    padding: 1rem;
+}
+
+.gifts {
+    padding: 10px;
+}
+
+.addPeople-Btn {
+    background-color: var(--Tosca);
+}
+
+.group-container {
+    padding: 10px;
+    max-width: 50%;
+    height: 750px;
+    display: flex;
+    font-weight: bold;
+    float: center;
+    position: relative;
+    background-color: red;
 }
