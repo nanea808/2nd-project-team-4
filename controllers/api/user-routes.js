@@ -39,6 +39,8 @@ router.get('/:id', async (req,res) => {
     }
 });
 
+// User login routes
+
 // post to create a user
 router.post('/', async (req, res) => {
     /*req.body should look something like this:
