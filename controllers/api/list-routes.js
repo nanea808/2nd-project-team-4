@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const {User, List, Item, Group, GroupList} = require('../../models');
 
-//get on all lists.
+// api/lists endpoint
+
 router.get('/', async (req, res) => {
     try {
         const listData = await List.findAll({
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
             include: [
                 {model: User}, 
                 {model: Item}, 
-                {model: Group, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: Group, through: {model: GroupList}}
             ]
         });
         res.status(200).json(listData);
@@ -24,7 +25,7 @@ router.get('/:id', async (req,res) => {
             include: [
                 {model: User}, 
                 {model: Item}, 
-                {model: Group, attributes: ['title'], through: {model: GroupList, attributes: ['group_id', 'list_id'],}}
+                {model: Group, through: {model: GroupList}}
             ]
         });
 
@@ -37,5 +38,37 @@ router.get('/:id', async (req,res) => {
         res.status(500).json(err);
     }
 });
+
+//post to create a list
+router.post('/', async (req, res) => {
+    /*req.body should look something like this:
+    {
+        title: "something",
+        user_id: 3,
+        groupIds: [1,2,3]
+    }
+    */
+    List.create(req.body)
+        .then((list) => {
+            if(req.body.groupIds) {
+                const groupListIdArr = req.body.groupIds.map((group_id) => {
+                    return {
+                        list_id: list.id,
+                        group_id
+                    };
+                });
+                GroupList.bulkCreate(groupListIdArr);
+            }
+            return true;
+        })
+        .then((results) => res.status(200).json(results))
+        .catch((err) => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+  });
+
+//put to update a list
+//delete to destroy a list
 
 module.exports = router;
