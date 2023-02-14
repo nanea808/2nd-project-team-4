@@ -40,7 +40,6 @@ router.get('/:id', async (req,res) => {
 });
 
 //post to create a group
-//not working
 router.post('/', async (req, res) => {
     /*req.body should look something like this:
     {
