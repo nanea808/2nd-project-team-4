@@ -17,7 +17,7 @@ Item.init(
     },
     description: {
         //optional
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     },
     link: {
         //optional
@@ -26,6 +26,7 @@ Item.init(
     status: {
         //unassigned, assigned, purchased
         type: DataTypes.STRING,
+        defaultValue: "unassigned",
         allowNull: false
     },
 

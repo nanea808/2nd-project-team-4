@@ -1,15 +1,15 @@
 [
     {
         "title":"usb-c headset adaptor",
-        "description":"",
-        "link":"",
+        "description":"this is a description!!!! Hi!!! I really want this!!!",
+        "link":"amazon.com/findThis",
         "status":"assigned",
         "list_id":"1"
     },
     {
         "title":"catnip",
-        "description":"",
-        "link":"",
+        "description":"it's good for my cat",
+        "link":"petsmart.com",
         "status":"purchased",
         "list_id":"3"
     },
@@ -43,22 +43,22 @@
     },
     {
         "title":"portable 15in monitor",
-        "description":"",
-        "link":"",
+        "description":"it has to be portable. I need this for when I'm driving so I can hide it if I get pulled over.",
+        "link":"unethical.com/links",
         "status":"unassigned",
         "list_id":"1"
     },
     {
         "title":"microfleece blanket",
-        "description":"",
-        "link":"",
+        "description":"none",
+        "link":"none",
         "status":"unassigned",
-        "list_id":"2"
+        "list_id":"5"
     },
     {
         "title":"a new car",
-        "description":"",
-        "link":"",
+        "description":"it's a brand new car!!!",
+        "link":"toyota.com",
         "status":"assigned",
         "list_id":"1"
     }

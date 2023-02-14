@@ -14,5 +14,17 @@
     {
         "title":"pearl's wishlist",
         "user_id":"4"
+    },
+    {
+        "title":"sarah's christmas party list",
+        "user_id":"1"
+    },
+    {
+        "title":"sarah's mother's day list",
+        "user_id":"1"
+    },
+    {
+        "title":"sarah's other party list",
+        "user_id":"1"
     }
 ]
