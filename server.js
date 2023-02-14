@@ -18,10 +18,10 @@ const userSess = {
     store: new SequelizeStore({ db: sequelize })
 };
 
-app.use(session(userSess));
-
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(session(userSess));
 
 const hbs = exphbs.create({}); //do we want to add {{ helpers }} here?
 // Set view engine

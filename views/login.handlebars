@@ -1,4 +1,50 @@
-<div class="row justify-space-between-md"> {{! may want to change layout later}}
+<div class="jumbotron">
+    <h1 class="display-3">Hello.</h1>
+        <p class="lead">Login or create an account to continue.</p>
+    <hr class="my-2">
+        {{!-- <p>Enter your username and password:</p> --}}
+        <form id="login-form">
+            <div class="form-group row">
+                <label for="login-email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="login-email" placeholder="email@example.com">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="login-password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="login-password" placeholder="password">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary mb-2" id="login-btn">Log in</button>
+                </div>
+            </div>
+        </form>
+
+</div>
+
+{{!-- <h2>Login</h2>
+
+<form class="form login-form">
+    <div class="form-group">
+        <label for="email-login">email:</label>
+        <input class="form-input" type="text" id="email-login" />
+    </div>
+    <div class="form-group">
+        <label for="password-login">password:</label>
+        <input class="form-input" type="password" id="password-login" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">login</button>
+    </div>
+</form> --}}
+
+<script src="../public/js/login.js"></script>
+
+
+{{!-- <div class="row justify-space-between-md"> {{! may want to change layout later}}
     <div class="login-card">
         <h2 class="page-title">Present Pear Login</h2>
         <form class="form login-form">
@@ -14,4 +60,4 @@
         </form>
     </div>
 
-<script src="../public/js/login.js"></script>
+<script src="../public/js/login.js"></script> --}}
