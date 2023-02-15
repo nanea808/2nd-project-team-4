@@ -8,12 +8,13 @@
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
     crossorigin="anonymous"
   />
+  <title>Present Pear</title>
   <script
     src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
     crossorigin="anonymous"
   ></script>
-  <title>Present Pear</title>
+  <script src="./js/logout.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,11 @@
       </h1>
       <div>
         <a class="text-white px-2" href="/">Homepage</a>
-        <a class="text-white px-2" href="/login">Login/Sign Up</a>
+        {{#if loggedIn}}
+          <button id="logout" class="col btn btn-link text-white py-0">logout</button>
+        {{else}}
+          <a class="text-white px-2" href="/login">Login/Sign Up</a>
+        {{/if}}
       </div>
 
     </header>
