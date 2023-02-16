@@ -1,26 +1,26 @@
 [
     {
         "title":"sarah's bday",
-        "owning_user_id":"1"
-    },
-    {
-        "title":"sarah's christmas party",
-        "owning_user_id":"1"
+        "owning_user_id":"1",
+        "userIds": [2, 3, 4],
+        "listIds": [1]
     },
     {
         "title":"reg's housewarming",
-        "owning_user_id":"2"
+        "owning_user_id":"2",
+        "userIds": [1, 3, 4],
+        "listIds": [2]
     },
     {
         "title":"daisy's secret santa party",
-        "owning_user_id":"3"
+        "owning_user_id":"3",
+        "userIds": [1, 2, 4],
+        "listIds": [3]
     },
     {
         "title":"pearl's gift exchange",
-        "owning_user_id":"4"
-    },
-    {
-        "title":"sarah's christmas party",
-        "owning_user_id":"1"
+        "owning_user_id":"4",
+        "userIds": [1, 2, 3],
+        "listIds": [4]
     }
 ]
