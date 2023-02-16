@@ -68,7 +68,22 @@ router.post('/', async (req, res) => {
         });
   });
 
-//put to update a list
 //delete to destroy a list
+router.delete('/:id', async (req, res) => {
+    try {
+      const listData = await List.destroy({
+        where: {id: req.params.id}
+      });
+  
+      if(!listData) {
+        res.status(404).json({message: 'No lists with that id.'});
+        return;
+      }
+  
+      res.status(200).json(listData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 module.exports = router;

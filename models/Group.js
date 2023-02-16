@@ -19,7 +19,7 @@ Group.init(
 
     //optional
     description: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     },
 
     //user owning the group

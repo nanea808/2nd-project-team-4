@@ -4,6 +4,10 @@
         "owning_user_id":"1"
     },
     {
+        "title":"sarah's christmas party",
+        "owning_user_id":"1"
+    },
+    {
         "title":"reg's housewarming",
         "owning_user_id":"2"
     },
@@ -14,5 +18,9 @@
     {
         "title":"pearl's gift exchange",
         "owning_user_id":"4"
+    },
+    {
+        "title":"sarah's christmas party",
+        "owning_user_id":"1"
     }
 ]
