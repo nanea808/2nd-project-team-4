@@ -50,6 +50,13 @@ router.post('/', async (req, res) => {
         listIds: [1.2.4.5]
     }
     */
+
+    try {
+        const dbGroupData = await Group.create({
+            title: req.body.title,
+            owning_user_id: req.body.owning_user_id
+        })
+    }
     Group.create(req.body)
         .then((group) => {
             if(req.body.userIds) {
