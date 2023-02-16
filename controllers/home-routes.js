@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User, List, Group, GroupUser, GroupList } = require("../models");
+const passport = require("../utils/auth");
 
+// will need to add Passport authentication eventually here
 router.get("/", async (req, res) => {
   const user_id = 1;
   const groupData = await Group.findAll({

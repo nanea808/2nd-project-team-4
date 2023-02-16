@@ -10,6 +10,8 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sequelize = require('./config/connection.js');
 
 const routes = require('./controllers');
+// add passport authentication util router
+// const authRouter = require('./utils/auth.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -43,6 +45,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
+// add app.use authRouter
+// app.use(authRouter);
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`App listening on http://localhost:${PORT}`));
