@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, List, Group, GroupUser, GroupList } = require("../models");
+const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
 router.get("/", async (req, res) => {
   const user_id = 1;
@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
   const groups = groupData.map((group) => group.get({ plain: true }));
   console.log(groups);
   res.render("homepage", { groups, loggedIn: req.session.loggedIn });
+});
 //homepage. Includes all groups a user is a part of, and all lists the user has made.
 //Page includes options to: login/logout, select a group, select a list, and create a list/group.
 router.get('/', async (req, res) => {
@@ -42,7 +43,6 @@ router.get("/group", async (req, res) => {
 //users can add lists to groups that they're a part of.
 //users can create and delete items on the list.
 router.get("/list/:id", async (req, res) => {
-  const user_id = 1;
     const listData = await List.findByPk(req.params.id, {
         include: [
             {model: Item},
@@ -52,7 +52,7 @@ router.get("/list/:id", async (req, res) => {
         res.json(err);
     });
     const list = listData.get({ plain: true });
-    res.render("listPage", { loggedIn: req.session.loggedIn }, {list});
+    res.render("listPage", { list, loggedIn: req.session.loggedIn });
 });
 
 router.get("/login", async (req, res) => {

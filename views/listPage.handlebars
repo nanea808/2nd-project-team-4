@@ -3,29 +3,32 @@
         
         <h3>List: {{list.title}} <button type="button">Delete list</button></h3>
 
-        <div class="col"></div>
-            <h4>Part of groups:</h4>
+        <div class="col-2">
+            <h4>Groups:</h4>
             <ol>
                 {{#each list.groups as |group|}}
-                <li>{{group.title}}</li>
+                    <li>{{group.title}}</li>
+                    <button type= "button">Delete item</button>
                 {{/each}}
             </ol>
-
-            <div class="col ">
-                <h5>Test</h5>
-            </div>
         </div>
 
-        <div class="col">
+        <div class="col-10">
                 {{#each list.items as |item|}}
-                <h5>Items: {{item.title}}</h5>
-                <ol>
-                    <li>{{item.description}}</li>
-                    <li><a href="{{item.link}}">link to product</a></li>
-                    {{!-- front-end makes a delete request to /api/item. --}}
-                    <button type= "button">Delete item</button>
-                </ol>
+                    <h5>Items: {{item.title}}</h5>
+                    <ul>
+                        {{#if item.description}}
+                            <li>Description: {{item.description}}</li>
+                        {{/if}}
+                        {{#if item.link}}
+                            <li><a href="{{item.link}}">link to product</a></li>
+                        {{/if}}
+                        {{!-- front-end makes a delete request to /api/item. --}}
+                        <button type= "button">Delete item</button>
+                    </ul>
                 {{/each}}
         </div>
     </div>
 </div>
+
+{{!-- to do: front-end logic sending requests to delete lists from groups and items from lists. --}}
