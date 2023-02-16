@@ -1,94 +1,88 @@
-{{!-- List those peeps! --}}
+{{! List those peeps! }}
 <div class="container-fluid">
-    <h2 class="text-uppercase">Group Members</h2>
-    <div>
-        <ul class="list-group">
-            <li class="list-group-item font-weight-bold text-center">
-               {{ username }}
-            </li>
-        </ul>
+  <h2 class="text-uppercase">Group Members</h2>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item font-weight-bold text-center">
+        {{username}}
+      </li>
+    </ul>
+  </div>
+</div>
+{{! Cards for items :) }}
+{{! Left column }}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
     </div>
-</div>
-{{!-- Cards for items :) --}}
-{{!-- Left column --}}
-<div class="container">
-<div class="row">
-<div class="col">
-    <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-            
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-</div>
-{{!-- Center column --}}
-<div class="col">
-    <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-            
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-</div>
-{{!-- Right column --}}
-<div class="col">
-    <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-            
-        <div class="card">
-        <div class="card-block text-center"> {{ title }}  </div>
-            <img class="card-img-bottom" src="" alt="Card image cap">
-            <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </button>
-        <div class="card">
-</div>
-</div>
+    {{! Center column }}
+    <div class="col">
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+    {{! Right column }}
+    <div class="col">
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="card">
+        <p class="card-block"> {{title}} </p>
+        <img class="card-img-bottom" src="" alt="Card image cap" />
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
