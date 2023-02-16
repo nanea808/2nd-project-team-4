@@ -50,6 +50,23 @@ router.post('/', async (req, res) => {
         listIds: [1.2.4.5]
     }
     */
+
+    try {
+        const dbGroupData = await Group.create({
+            title: req.body.title,
+            owning_user_id: req.body.owning_user_id,
+            userIds: req.body.userIds,
+            listIds: req.body.listIDs
+        });
+
+        req.session.save(() => {
+            req.session(200).json(dbGroupData);
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('Error' + err);
+    };
+
     Group.create(req.body)
         .then((group) => {
             if(req.body.userIds) {
@@ -83,5 +100,26 @@ router.post('/', async (req, res) => {
 
 //put to update a group (change name)
 //delete to delete a group
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const groupData = await Group.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id,
+            },
+        });
+
+        if (!groupData) {
+            res.status(404).json({message: 'Group id not found.'});
+            return;
+        }
+
+        res.status(200).json(groupData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err); //delete when finished testing
+    }
+});
 
 module.exports = router;
