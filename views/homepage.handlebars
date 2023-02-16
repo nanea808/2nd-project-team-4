@@ -15,12 +15,11 @@
     <div class="col">
       <h1>Lists</h1>
       <div class="row row-cols-2">
-        <div class="col">column</div>
-        <div class="col">column</div>
-        <div class="col">column</div>
-        <div class="col">column</div>
-        <div class="col">column</div>
-        <div class="col">column</div>
+        {{#each lists as |list|}}
+          <div class="col">
+            <p>{{list.title}}</p>
+          </div>
+        {{/each}}
       </div>
     </div>
   </div>

@@ -2,17 +2,27 @@ const router = require("express").Router();
 const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
 router.get("/", async (req, res) => {
-  const user_id = 1;
+  // Get groups based on logged in users ID
   const groupData = await Group.findAll({
     where: {
-      owning_user_id: user_id,
+      owning_user_id: req.session.userID,
     },
   }).catch((err) => {
     res.json(err);
   });
   const groups = groupData.map((group) => group.get({ plain: true }));
-  console.log(groups);
-  res.render("homepage", { groups, loggedIn: req.session.loggedIn });
+
+  // Get lists based on logged in users ID
+  const listData = await List.findAll({
+    where: {
+      user_id: req.session.userID,
+    },
+  }).catch((err) => {
+    res.json(err);
+  });
+  const lists = listData.map((list) => list.get({ plain: true }));
+
+  res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn });
 });
 //homepage. Includes all groups a user is a part of, and all lists the user has made.
 //Page includes options to: login/logout, select a group, select a list, and create a list/group.
