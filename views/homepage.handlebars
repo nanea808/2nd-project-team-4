@@ -5,8 +5,8 @@
       <h1>Groups</h1>
       <div class="row row-cols-2">
         {{#each groups as |group|}}
-          <div data-group-id="{{group.id}}" class="col">
-            <p>{{group.title}}</p>
+          <div class="col">
+            <p data-group-id="{{group.id}}">{{group.title}}</p>
           </div>
         {{/each}}
       </div>

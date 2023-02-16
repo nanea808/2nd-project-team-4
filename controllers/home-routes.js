@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
+//homepage. Includes all groups a user is a part of, and all lists the user has made.
+//Page includes options to: login/logout, select a group, select a list, and create a list/group.
 router.get("/", async (req, res) => {
   // Get groups based on logged in users ID
   if (req.session.loggedIn) {
@@ -22,25 +24,11 @@ router.get("/", async (req, res) => {
       res.json(err);
     });
     const lists = listData.map((list) => list.get({ plain: true }));
+
     res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn });
   } else {
     res.render("login");
   }
-});
-//homepage. Includes all groups a user is a part of, and all lists the user has made.
-//Page includes options to: login/logout, select a group, select a list, and create a list/group.
-router.get("/", async (req, res) => {
-  const user_id = 1;
-  const groupData = await Group.findAll({
-    where: {
-      owning_user_id: user_id,
-    },
-  }).catch((err) => {
-    res.json(err);
-  });
-  const groups = groupData.map((group) => group.get({ plain: true }));
-  console.log(groups);
-  res.render("homepage", { groups });
 });
 
 //group page. Includes information for the selected group, including: the group owner and name along the top,
@@ -48,8 +36,10 @@ router.get("/", async (req, res) => {
 //Owners have the option to add/remove users and delete the group. Users added to a group have to add a list to the group from the list page.
 //There is a button to select a random item for a specified group member.
 //Users have the option to change the status of a gift between unassigned, assigned, and purchased. List owners don't see the status of items on their list.
-router.get("/group", async (req, res) => {
-  res.render("groupPage", { loggedIn: req.session.loggedIn });
+router.get("/group/:id", async (req, res) => {
+  const groupData = await Group.findByPk(req.params.id);
+  const group = groupData.get({ plain: true });
+  res.render("groupPage", { group, loggedIn: req.session.loggedIn });
 });
 
 //list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.

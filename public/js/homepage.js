@@ -3,8 +3,8 @@ $(() => {
         const element = event.target;
         
         if (element.matches("p")) {
-            document.location = "/group";
-            
+            document.location = `/group/${element.dataset.groupId}`
+            // console.log(element.dataset.groupId);
         }
     }
 
