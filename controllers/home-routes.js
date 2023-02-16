@@ -3,41 +3,44 @@ const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
 router.get("/", async (req, res) => {
   // Get groups based on logged in users ID
+  if (req.session.loggedIn) {
+    const groupData = await Group.findAll({
+      where: {
+        owning_user_id: req.session.userID,
+      },
+    }).catch((err) => {
+      res.json(err);
+    });
+    const groups = groupData.map((group) => group.get({ plain: true }));
+
+    // Get lists based on logged in users ID
+    const listData = await List.findAll({
+      where: {
+        user_id: req.session.userID,
+      },
+    }).catch((err) => {
+      res.json(err);
+    });
+    const lists = listData.map((list) => list.get({ plain: true }));
+    res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn });
+  } else {
+    res.render("login");
+  }
+});
+//homepage. Includes all groups a user is a part of, and all lists the user has made.
+//Page includes options to: login/logout, select a group, select a list, and create a list/group.
+router.get("/", async (req, res) => {
+  const user_id = 1;
   const groupData = await Group.findAll({
     where: {
-      owning_user_id: req.session.userID,
+      owning_user_id: user_id,
     },
   }).catch((err) => {
     res.json(err);
   });
   const groups = groupData.map((group) => group.get({ plain: true }));
-
-  // Get lists based on logged in users ID
-  const listData = await List.findAll({
-    where: {
-      user_id: req.session.userID,
-    },
-  }).catch((err) => {
-    res.json(err);
-  });
-  const lists = listData.map((list) => list.get({ plain: true }));
-
-  res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn });
-});
-//homepage. Includes all groups a user is a part of, and all lists the user has made.
-//Page includes options to: login/logout, select a group, select a list, and create a list/group.
-router.get('/', async (req, res) => {
-    const user_id = 1;
-    const groupData = await Group.findAll({
-        where: {
-            owning_user_id: user_id
-        }
-    }).catch((err) => {
-        res.json(err);
-    });
-    const groups = groupData.map((group) => group.get({ plain: true }));
-    console.log(groups);
-    res.render('homepage', { groups });
+  console.log(groups);
+  res.render("homepage", { groups });
 });
 
 //group page. Includes information for the selected group, including: the group owner and name along the top,
@@ -53,16 +56,13 @@ router.get("/group", async (req, res) => {
 //users can add lists to groups that they're a part of.
 //users can create and delete items on the list.
 router.get("/list/:id", async (req, res) => {
-    const listData = await List.findByPk(req.params.id, {
-        include: [
-            {model: Item},
-            {model: Group, through: {model: GroupList}}
-        ]
-    }).catch((err) => {
-        res.json(err);
-    });
-    const list = listData.get({ plain: true });
-    res.render("listPage", { list, loggedIn: req.session.loggedIn });
+  const listData = await List.findByPk(req.params.id, {
+    include: [{ model: Item }, { model: Group, through: { model: GroupList } }],
+  }).catch((err) => {
+    res.json(err);
+  });
+  const list = listData.get({ plain: true });
+  res.render("listPage", { list, loggedIn: req.session.loggedIn });
 });
 
 router.get("/login", async (req, res) => {

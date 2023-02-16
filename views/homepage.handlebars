@@ -1,18 +1,18 @@
 <div class="container-fluid text-center">
   <div class="row row-cols-2">
     {{! groups column }}
-    <div class="col">
+    <div id="groups-col" class="col">
       <h1>Groups</h1>
       <div class="row row-cols-2">
         {{#each groups as |group|}}
-          <div class="col">
+          <div data-group-id="{{group.id}}" class="col">
             <p>{{group.title}}</p>
           </div>
         {{/each}}
       </div>
     </div>
     {{! list column }}
-    <div class="col">
+    <div id="lists-col" class="col">
       <h1>Lists</h1>
       <div class="row row-cols-2">
         {{#each lists as |list|}}
