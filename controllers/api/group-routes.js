@@ -54,9 +54,19 @@ router.post('/', async (req, res) => {
     try {
         const dbGroupData = await Group.create({
             title: req.body.title,
-            owning_user_id: req.body.owning_user_id
-        })
-    }
+            owning_user_id: req.body.owning_user_id,
+            userIds: req.body.userIds,
+            listIds: req.body.listIDs
+        });
+
+        req.session.save(() => {
+            req.session(200).json(dbGroupData);
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('Error' + err);
+    };
+    
     Group.create(req.body)
         .then((group) => {
             if(req.body.userIds) {
