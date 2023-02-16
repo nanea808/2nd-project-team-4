@@ -1,32 +1,39 @@
 <div class="container text-center">
     <div class="row align-items-center">
         
-        <h3>List: {{list.title}} <button type="button">Delete list</button></h3>
+        <h3>{{list.title}}<button type="button" class="btn btn-danger">Delete List</button></h3>
 
         <div class="col-2">
             <h4>Groups:</h4>
             <ol>
                 {{#each list.groups as |group|}}
                     <li>{{group.title}}</li>
-                    <button type= "button">Delete item</button>
+                    <button type="button" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
         </div>
 
         <div class="col-10">
+            <div class="card-deck">
+                <div class="row">
                 {{#each list.items as |item|}}
-                    <h5>Items: {{item.title}}</h5>
-                    <ul>
-                        {{#if item.description}}
-                            <li>Description: {{item.description}}</li>
-                        {{/if}}
-                        {{#if item.link}}
-                            <li><a href="{{item.link}}">link to product</a></li>
-                        {{/if}}
-                        {{!-- front-end makes a delete request to /api/item. --}}
-                        <button type= "button">Delete item</button>
-                    </ul>
+                    <div class="col-4 m-2">
+                        <div class="card"  style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                                {{#if item.description}}
+                                    <p class="card-text">{{item.description}}</p>
+                                {{/if}}
+                                {{#if item.link}}
+                                    <a href="{{item.link}}" target="_blank" rel='noreferrer' class="card-link">Link to Product</a>
+                                {{/if}}
+                                <button type="button" class="btn btn-danger">Delete Item</button>
+                            </div>
+                        </div>
+                    </div>
                 {{/each}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
