@@ -63,10 +63,11 @@ router.post("/", async (req, res) => {
         });
         GroupUser.bulkCreate(groupUserIdArr);
       }
-      return true;
+      return user;
     })
     .then((results) => {
       req.session.save(() => {
+        req.session.userID = results.id;
         req.session.loggedIn = true;
         req.session.userID = res.id;
         res.status(200).json(results);
