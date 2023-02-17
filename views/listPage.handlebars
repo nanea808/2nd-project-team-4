@@ -16,9 +16,11 @@
         <div class="col-10">
             <div class="card-deck">
                 <div class="row">
+                
+                {{!-- Items in list --}}
                 {{#each list.items as |item|}}
                     <div class="col-4 m-2">
-                        <div class="card"  style="width: 18rem;">
+                        <div class="card" style="width: 18rem">
                             <div class="card-body">
                                 <h5 class="card-title">{{item.title}}</h5>
                                 {{#if item.description}}
@@ -27,15 +29,30 @@
                                 {{#if item.link}}
                                     <a href="{{item.link}}" target="_blank" rel='noreferrer' class="card-link">Link to Product</a>
                                 {{/if}}
-                                <button type="button" class="btn btn-danger">Delete Item</button>
+                                <button id="item-del" class="btn btn-danger ">X</button>
                             </div>
                         </div>
                     </div>
                 {{/each}}
+
+                {{!-- new item --}}
+                    <div class="col-4 m-2">
+                        <div class="card"  style="width: 18rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Add an Item</h5>
+                                <form id="item-form" data-list_id={{list.id}} class="form-group form-group-sm">
+                                    <input id="item-title" type="title" class="form-control form-control-sm" placeholder="Title"> </input>
+                                    <textarea id="item-description" type="description" class="form-control form-control-sm" rows="3" placeholder="Description (optional)"> </textarea>
+                                    <input id="item-link" type="link" class="form-control form-control-sm" placeholder="full URL (optional)"> </input>
+                                    <button id="item-submit-btn" class="btn btn-dark mx-1" type="submit"> Add Item </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{!-- to do: front-end logic sending requests to delete lists from groups and items from lists. --}}
+<script src="/js/list.js"></script>

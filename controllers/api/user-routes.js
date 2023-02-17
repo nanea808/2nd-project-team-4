@@ -68,6 +68,7 @@ router.post("/", async (req, res) => {
     .then((results) => {
       req.session.save(() => {
         req.session.loggedIn = true;
+        req.session.userID = res.id;
         res.status(200).json(results);
       });
     })
