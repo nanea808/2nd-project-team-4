@@ -37,9 +37,21 @@ router.get("/", async (req, res) => {
 //There is a button to select a random item for a specified group member.
 //Users have the option to change the status of a gift between unassigned, assigned, and purchased. List owners don't see the status of items on their list.
 router.get("/group/:id", async (req, res) => {
-  const groupData = await Group.findByPk(req.params.id);
+  const groupData = await Group.findByPk(req.params.id, {
+    include: [
+      { model: User },
+      { model: User, through: { model: GroupUser } },
+      { model: List, through: { model: GroupList } },
+    ],
+  });
   const group = groupData.get({ plain: true });
-  res.render("groupPage", { group, loggedIn: req.session.loggedIn });
+
+  if (group.owning_user_id != req.session.userID) {
+    res.send("You dont own this group.");
+    return;
+  }
+  
+  res.render("groupPage", { group, loggedIn: req.session.loggedIn, userID: req.session.userID });
 });
 
 //list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.
