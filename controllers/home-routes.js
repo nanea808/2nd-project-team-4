@@ -44,7 +44,15 @@ router.get("/group/:id", async (req, res) => {
       { model: List, through: { model: GroupList } },
     ],
   });
-  const group = groupData.get({ plain: true });
+  let group = groupData.get({ plain: true });
+  
+  for (const user in group.users) {
+    if (group.users[user].id === req.session.userID) {
+      delete group.users[user];
+    }
+  }
+
+  console.log(group);
 
   if (group.owning_user_id != req.session.userID) {
     res.send("You dont own this group.");

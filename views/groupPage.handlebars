@@ -4,10 +4,10 @@
   <div>
     <ul class="list-group">
       {{#each group.users as |user|}}
-        {{else}}
-        <li data-user="{{user.id}}" class="list-group-item font-weight-bold text-center">
-          {{user.username}}
-        </li>
+        {{#if user}}
+          <li data-user="{{user.id}}" class="list-group-item font-weight-bold text-center">
+            {{user.username}}
+          </li>
         {{/if}}
       {{/each}}
     </ul>
