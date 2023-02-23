@@ -58,13 +58,28 @@ router.get("/group/:id", async (req, res) => {
 //users can add lists to groups that they're a part of.
 //users can create and delete items on the list.
 router.get("/list/:id", async (req, res) => {
+  if(!req.session.loggedIn) {
+    res.redirect('/login');
+    return;
+  }
+
   const listData = await List.findByPk(req.params.id, {
-    include: [{ model: Item }, { model: Group, through: { model: GroupList } }],
+      include: [
+          {model: Item},
+          {model: User},
+          {model: Group, through: {model: GroupList}}
+      ]
   }).catch((err) => {
-    res.json(err);
+      res.json(err);
   });
-  const list = listData.get({ plain: true });
-  res.render("listPage", { list, loggedIn: req.session.loggedIn });
+    
+    const list = listData.get({ plain: true });
+    // if(req.session.userID !== list.user_id) {
+    //   res.send(`You don't have access to that list.`);
+    //   return;
+    // }
+
+    res.render("listPage", { list, loggedIn: req.session.loggedIn });
 });
 
 router.get("/login", async (req, res) => {
