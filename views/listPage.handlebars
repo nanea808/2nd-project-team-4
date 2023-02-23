@@ -8,7 +8,7 @@
             <ol>
                 {{#each list.groups as |group|}}
                     <li>{{group.title}}</li>
-                    <button type="button" data-group_id="{{group.id}}" data-list_id="{{list.id}}" class="btn btn-danger">Remove Group</button>
+                    <button type="button" id="group-del-btn-{{group.id}}" data-group_id="{{group.id}}" data-list_id="{{group.GroupList.list_id}}" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
         </div>

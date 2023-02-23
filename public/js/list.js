@@ -45,6 +45,7 @@
       event.preventDefault();
       const group_id = $(this).data('group_id');
       const list_id = $(this).data('list_id');
+      alert(`button pushed. group_id is: ${group_id}, and list_id is: ${list_id}.`);
       const response = await fetch(`/api/lists/${list_id}`, {
         method: "PUT",
         body: `{"removedGroup": "${group_id}"}`,
