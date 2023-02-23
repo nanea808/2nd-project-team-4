@@ -68,6 +68,20 @@ router.post('/', async (req, res) => {
         });
   });
 
+  //Remove a group. parameter is list id, group id is in the body.
+  router.put('/:id', async (req, res) => {
+    try {
+        await GroupList.destroy({where: {group_id: req.body.removedGroup, list_id: req.params.id}});
+        if(req.body.title) {
+            const listData = await List.update({title: req.body.title}, {where: {id: req.params.id}});
+            res.status(200).json(listData);
+        }
+        else res.status(200).json({message: `group with ID ${req.body.removedGroup} removed from this list.`});
+      } catch (err) {
+        res.status(500).json(err);
+      }
+  });
+
 //delete to destroy a list
 router.delete('/:id', async (req, res) => {
     try {
