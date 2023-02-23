@@ -10,12 +10,10 @@
     box-sizing: content-box;
     margin: 0;
     padding: 0;
-    font-family: 'Macondo';
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .body {
-    background-color: rgb(255, 138, 43);
-    color: rgb(145, 145, 145);
     border: 1px;
     box-sizing: content-box;
 }
@@ -27,7 +25,7 @@ button:hover {
 
 .header {
     background-color: var(--PearRed);
-    height: 60px;
+    height: 65px;
     display: flex;
     color: black;
     justify-content: right;
@@ -49,7 +47,7 @@ header h1 {
 
 
 
-.saved, .new {
+.signUp, .logIn {
     border: 2px solid black;
     margin-top: 6px;
     padding: 10px;
@@ -59,35 +57,35 @@ header h1 {
 }
 
 
-.header, .saved {
+.header, .signUp {
     padding-top: 20px;
     padding: 10px;
     justify-content: right;
 }
 
 .title {
-    padding: 10px;
+    padding-left: 10px;
+    font-size: 50px;
 }
 
 .gift-container {
-    padding: 10px;
-    max-width: 50%;
-    min-width: 50%;
     height: 750px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     font-weight: bold;
-    float: left;
     position: relative;
-    background-color:aqua;
+    background-color: var(--Concord);
 }
 
-
-.border{
-    border: 5px solid rgb(0, 0, 0);
-    background-color: var(--Bosc);
-    height: 200px;
+.group-container {
+    height: 750px;
     display: flex;
-    align-self: flex-start;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-weight: bold;
+    position: relative;
+    background-color: var(--Bosc);
 }
 
 #signUp-btn, #logIn-btn {
@@ -112,13 +110,21 @@ header h1 {
     background-color: var(--Tosca);
 }
 
-.group-container {
-    padding: 10px;
-    max-width: 50%;
-    height: 750px;
-    display: flex;
+.pics {
+    height: 200px;
+    width: 200px;
+}
+
+.mainBody {
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
     font-weight: bold;
-    float: center;
-    position: relative;
-    background-color: red;
+    font-size: 60px;
+}
+
+.mainBody {
+    background-color: var(--Tosca);
 }
