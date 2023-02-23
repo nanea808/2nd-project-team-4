@@ -50,8 +50,7 @@ router.get("/group/:id", async (req, res) => {
     res.send("You dont own this group.");
     return;
   }
-  
-  res.render("groupPage", { group, loggedIn: req.session.loggedIn, userID: req.session.userID });
+  else res.render("groupPage", { group, loggedIn: req.session.loggedIn, userID: req.session.userID });
 });
 
 //list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.
@@ -72,14 +71,14 @@ router.get("/list/:id", async (req, res) => {
   }).catch((err) => {
       res.json(err);
   });
-    
-    const list = listData.get({ plain: true });
-    // if(req.session.userID !== list.user_id) {
-    //   res.send(`You don't have access to that list.`);
-    //   return;
-    // }
 
-    res.render("listPage", { list, loggedIn: req.session.loggedIn });
+    const list = listData.get({ plain: true });
+
+    if(req.session.userID !== list.user_id) {
+      res.send(`You don't have access to that list.`);
+      return;
+    }
+    else res.render("listPage", { list, loggedIn: req.session.loggedIn });
 });
 
 router.get("/login", async (req, res) => {
