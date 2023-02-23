@@ -8,5 +8,15 @@ $(() => {
         }
     }
 
-    $('#groups-col').children().eq(1).click(redirectGroup)
+    const redirectList = (event) => {
+        const element = event.target;
+        
+        if (element.matches("p")) {
+            document.location = `/list/${element.dataset.listId}`
+            // console.log(element.dataset.groupId);
+        }
+    }
+
+    $('#groups-col').children().eq(1).click(redirectGroup);
+    $('#lists-col').children().eq(1).click(redirectList);
 });
