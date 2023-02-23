@@ -41,11 +41,11 @@ router.get("/group/:id", async (req, res) => {
     include: [
       { model: User },
       { model: User, through: { model: GroupUser } },
-      { model: List, through: { model: GroupList } },
+      { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
   });
   let group = groupData.get({ plain: true });
-  
+
   for (const user in group.users) {
     if (group.users[user].id === req.session.userID) {
       delete group.users[user];
