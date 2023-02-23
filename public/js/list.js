@@ -1,14 +1,14 @@
 (function() {  
 
     //create new item
-    const newItem = async (event) => {
+    async function newItem(event){
       event.preventDefault();
 
       const title = $('#item-title').val().trim();
       const description = $("#item-description").val().trim();
       const link = $("#item-link").val().trim();
       const status = "unassigned";
-      const list_id = 1;
+      const list_id = $(this).data('list_id');
       
       if (title) {   
         const response = await fetch("/api/items", {
@@ -51,7 +51,7 @@
         body: `{"removedGroup": "${group_id}"}`,
         headers: {"Content-Type": "application/json"},
       });
-      
+
       if (response.ok) {
         location.reload();
       } else {
