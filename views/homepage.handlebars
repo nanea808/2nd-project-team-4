@@ -11,14 +11,17 @@
         {{/each}}
       </div>
     </div>
+
     {{! list column }}
     <div id="lists-col" class="col">
       <h1>Lists</h1>
       <div class="row row-cols-2">
         {{#each lists as |list|}}
-          <div class="col">
-            <p data-list-id="{{list.id}}">{{list.title}}</p>
+        <div class="card" data-list-id="{{list.id}}" style="width: 18rem">
+          <div class="card-body">
+            <h4 class="card-title" >{{list.title}}</h4>
           </div>
+        </div>
         {{/each}}
       </div>
     </div>

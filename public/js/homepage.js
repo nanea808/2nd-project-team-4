@@ -11,7 +11,7 @@ $(() => {
     const redirectList = (event) => {
         const element = event.target;
         
-        if (element.matches("p")) {
+        if (element.matches("div")) {
             document.location = `/list/${element.dataset.listId}`
             // console.log(element.dataset.groupId);
         }
