@@ -1,7 +1,7 @@
 const Group = require('./Group');
 const Item = require('./Item');
-const List = require('./List');
-const User = require('./User');
+const List = require('./list');
+const User = require('./user');
 
 //junctions
 const GroupList = require('./GroupList');
