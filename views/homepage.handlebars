@@ -17,7 +17,7 @@
       <div class="row row-cols-2">
         {{#each lists as |list|}}
           <div class="col">
-            <p>{{list.title}}</p>
+            <p data-list-id="{{list.id}}">{{list.title}}</p>
           </div>
         {{/each}}
       </div>
