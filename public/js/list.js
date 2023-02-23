@@ -17,7 +17,6 @@
         });
   
         if (response.ok) {
-          console.log("item added!");
           location.reload();
         } else {
           alert("Failed to add an item.");
@@ -25,18 +24,46 @@
       }
     };
 
-    // const deleteItem = async (event) => {
-    //     event.preventDefault();
-    //     const response = await fetch("api/items")
-    // }
+    async function deleteItem(event) {
+      event.preventDefault();
+      const item_id = $(this).data('item_id');
+      const response = await fetch(`/api/items/${item_id}`, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+      });
+
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert("Failed to delete an item.");
+      }
+    }
 
     //const deleteList
 
-    //const deleteFromGroup
+    async function updateGroups(event) {
+      event.preventDefault();
+      const group_id = $(this).data('group_id');
+      const list_id = $(this).data('list_id');
+      const response = await fetch(`/api/lists/${list_id}`, {
+        method: "PUT",
+        body: `{"removedGroup": "${group_id}"}`,
+        headers: {"Content-Type": "application/json"},
+      });
+
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert("Failed to delete from a group.");
+      }
+    }
 
     //const addToGroup
     //need to 
+
     $("#item-form").submit(newItem);
+    $("button[id^='item-del-btn']").click(deleteItem);
+    $("button[id^='group-del-btn']").click(updateGroups);
   })();
 
   // front-end logic sending requests to delete lists from groups and items from lists. Form for adding items to a list. Add-to-group function.=
