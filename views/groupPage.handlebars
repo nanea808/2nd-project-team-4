@@ -4,10 +4,13 @@
   <div>
     <ul class="list-group">
       {{#each group.users as |user|}}
-        {{else}}
-        <li data-user="{{user.id}}" class="list-group-item font-weight-bold text-center">
-          {{user.username}}
-        </li>
+        {{#if user}}
+          <li
+            data-user="{{user.id}}"
+            class="list-group-item font-weight-bold text-center"
+          >
+            {{user.username}}
+          </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -17,47 +20,42 @@
 {{! Left column }}
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
-      <div class="card">
-        <p class="card-block"> {{title}} </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block"> {{title}} </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block"> {{title}} </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
+    <div id="lists" class="col">
+      {{#each group.lists as |list|}}
+        <div data-owner="{{list.user_id}}" style="display: none">
+          <h2>{{list.title}}</h2>
+          {{#each list.items as |item|}}
+            <div class="card">
+              <p class="card-block"> {{item.title}} </p>
+              {{!-- <img class="card-img-bottom" src="" alt="Card image cap" /> --}}
+              <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+
     </div>
+
     {{! Center column }}
-    <div class="col">
+    {{!-- <div class="col">
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
@@ -67,26 +65,28 @@
     {{! Right column }}
     <div class="col">
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="card">
-        <p class="card-block"> {{title}} </p>
+        <p class="card-block">  </p>
         <img class="card-img-bottom" src="" alt="Card image cap" />
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>
+
+<script src="/js/groupPage.js"></script>

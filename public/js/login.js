@@ -1,7 +1,6 @@
-$(() => {
+(function() {
   const loginFormHandler = async (event) => {
     event.preventDefault();
-
     const email = document.querySelector("#login-email").value.trim();
     const password = document.querySelector("#login-password").value.trim();
 
@@ -48,4 +47,4 @@ $(() => {
     .addEventListener("submit", loginFormHandler);
 
   $("#signup-form").submit(signUp);
-});
+})();

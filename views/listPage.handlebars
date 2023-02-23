@@ -1,24 +1,26 @@
 <div class="container text-center">
     <div class="row align-items-center">
         
-        <h3>{{list.title}}<button type="button" class="btn btn-danger">Delete List</button></h3>
+        <h3>{{list.title}}</h3>
 
         <div class="col-2">
             <h4>Groups:</h4>
             <ol>
                 {{#each list.groups as |group|}}
                     <li>{{group.title}}</li>
-                    <button type="button" class="btn btn-danger">Remove Group</button>
+                    <button type="button" id="group-del-btn-{{group.id}}" data-group_id="{{group.id}}" data-list_id="{{group.GroupList.list_id}}" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
         </div>
 
+
         <div class="col-10">
             <div class="card-deck">
                 <div class="row">
-                {{#each list.items as |item|}}
+                    {{!-- Items in list --}}
+                    {{#each list.items as |item|}}
                     <div class="col-4 m-2">
-                        <div class="card"  style="width: 18rem;">
+                        <div class="card" style="width: 18rem">
                             <div class="card-body">
                                 <h5 class="card-title">{{item.title}}</h5>
                                 {{#if item.description}}
@@ -27,15 +29,30 @@
                                 {{#if item.link}}
                                     <a href="{{item.link}}" target="_blank" rel='noreferrer' class="card-link">Link to Product</a>
                                 {{/if}}
-                                <button type="button" class="btn btn-danger">Delete Item</button>
+                                <button id="item-del-btn-{{item.id}}" type="button" data-item_id="{{item.id}}" class="btn btn-danger">X</button>
                             </div>
                         </div>
                     </div>
-                {{/each}}
+                    {{/each}}
+
+                {{!-- new item --}}
+                    <div class="col-4 m-2">
+                        <div class="card"  style="width: 18rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Add an Item</h5>
+                                <form id="item-form" data-list_id="{{list.id}}" class="form-group form-group-sm">
+                                    <input id="item-title" type="title" class="form-control form-control-sm" placeholder="Title"> </input>
+                                    <textarea id="item-description" type="description" class="form-control form-control-sm" rows="3" placeholder="Description (optional)"> </textarea>
+                                    <input id="item-link" type="link" class="form-control form-control-sm" placeholder="full URL (optional)"> </input>
+                                    <button id="item-submit-btn" class="btn btn-dark mx-1" type="submit"> Add Item </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{!-- to do: front-end logic sending requests to delete lists from groups and items from lists. --}}
+<script src="/js/list.js"></script>

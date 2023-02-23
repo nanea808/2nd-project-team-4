@@ -41,30 +41,52 @@ router.get("/group/:id", async (req, res) => {
     include: [
       { model: User },
       { model: User, through: { model: GroupUser } },
-      { model: List, through: { model: GroupList } },
+      { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
   });
-  const group = groupData.get({ plain: true });
+  let group = groupData.get({ plain: true });
+
+  for (const user in group.users) {
+    if (group.users[user].id === req.session.userID) {
+      delete group.users[user];
+    }
+  }
+
+  console.log(group);
 
   if (group.owning_user_id != req.session.userID) {
     res.send("You dont own this group.");
     return;
   }
-  
-  res.render("groupPage", { group, loggedIn: req.session.loggedIn, userID: req.session.userID });
+  else res.render("groupPage", { group, loggedIn: req.session.loggedIn, userID: req.session.userID });
 });
 
 //list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.
 //users can add lists to groups that they're a part of.
 //users can create and delete items on the list.
 router.get("/list/:id", async (req, res) => {
+  if(!req.session.loggedIn) {
+    res.redirect('/login');
+    return;
+  }
+
   const listData = await List.findByPk(req.params.id, {
-    include: [{ model: Item }, { model: Group, through: { model: GroupList } }],
+      include: [
+          {model: Item},
+          {model: User},
+          {model: Group, through: {model: GroupList}}
+      ]
   }).catch((err) => {
-    res.json(err);
+      res.json(err);
   });
-  const list = listData.get({ plain: true });
-  res.render("listPage", { list, loggedIn: req.session.loggedIn });
+
+    const list = listData.get({ plain: true });
+
+    if(req.session.userID !== list.user_id) {
+      res.send(`You don't have access to that list.`);
+      return;
+    }
+    else res.render("listPage", { list, loggedIn: req.session.loggedIn });
 });
 
 router.get("/login", async (req, res) => {
