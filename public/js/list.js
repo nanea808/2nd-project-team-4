@@ -1,5 +1,6 @@
 (function() {  
 
+    //create new item
     const newItem = async (event) => {
       event.preventDefault();
 
@@ -24,6 +25,7 @@
       }
     };
 
+    //delete item
     async function deleteItem(event) {
       event.preventDefault();
       const item_id = $(this).data('item_id');
@@ -39,8 +41,7 @@
       }
     }
 
-    //const deleteList
-
+    //remove a group
     async function updateGroups(event) {
       event.preventDefault();
       const group_id = $(this).data('group_id');
@@ -50,7 +51,7 @@
         body: `{"removedGroup": "${group_id}"}`,
         headers: {"Content-Type": "application/json"},
       });
-
+      
       if (response.ok) {
         location.reload();
       } else {
@@ -58,7 +59,7 @@
       }
     }
 
-    //const addToGroup
+    //async f addToGroup
     //need to 
 
     $("#item-form").submit(newItem);
