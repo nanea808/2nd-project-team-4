@@ -1,13 +1,14 @@
 (function() {  
 
-    const newItem = async (event) => {
+    //create new item
+    async function newItem(event){
       event.preventDefault();
 
       const title = $('#item-title').val().trim();
       const description = $("#item-description").val().trim();
       const link = $("#item-link").val().trim();
       const status = "unassigned";
-      const list_id = 1;
+      const list_id = $(this).data('list_id');
       
       if (title) {   
         const response = await fetch("/api/items", {
@@ -24,6 +25,7 @@
       }
     };
 
+    //delete item
     async function deleteItem(event) {
       event.preventDefault();
       const item_id = $(this).data('item_id');
@@ -39,8 +41,7 @@
       }
     }
 
-    //const deleteList
-
+    //remove a group
     async function updateGroups(event) {
       event.preventDefault();
       const group_id = $(this).data('group_id');
@@ -58,7 +59,7 @@
       }
     }
 
-    //const addToGroup
+    //async f addToGroup
     //need to 
 
     $("#item-form").submit(newItem);
