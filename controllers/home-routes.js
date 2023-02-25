@@ -62,7 +62,7 @@ router.get("/group/:id", async (req, res) => {
   }
 
   if (!user_belongs) {
-    res.send("You dont own this group.");
+    res.send("You don't own this group.");
     return;
   }
 
