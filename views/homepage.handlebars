@@ -3,6 +3,9 @@
     {{! groups column }}
     <div id="groups-col" class="col">
       <h1>Groups</h1>
+      <div class="container-fluid align-items-center">
+        <button id="new-group" class="btn btn-primary" type="">New Group</button>
+      </div>
       <div class="row row-cols-2">
         {{#each groups as |group|}}
           <div class="col">
@@ -14,6 +17,9 @@
     {{! list column }}
     <div id="lists-col" class="col">
       <h1>Lists</h1>
+            <div class="container-fluid align-items-center">
+        <button id="new-list" class="btn btn-primary" type="">New Wish List</button>
+      </div>
       <div class="row row-cols-2">
         {{#each lists as |list|}}
           <div class="col">
