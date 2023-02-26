@@ -19,6 +19,14 @@ GroupUser.init(
                 key: 'id'
             }
         },
+        // testing this out; including title makes it a little easier to know what group is what, etc.
+        group_title: {
+            type: DataTypes.STRING,
+            references: {
+                model: 'group',
+                key: 'title'
+            }
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {

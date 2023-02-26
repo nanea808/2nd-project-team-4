@@ -2,21 +2,31 @@
     {
         "username":"sarahkh",
         "password":"testing",
-        "email":"sarah.k.hopper@gmail.com"
+        "email":"sarah@gmail.com",
+        "user_id":"1"
     },
     {
         "username":"reggums",
         "password":"testing",
-        "email":"reg@gmail.com"
+        "email":"reg@gmail.com",
+        "user_id":"2"
     },
     {
         "username":"daisy",
         "password":"testing",
-        "email":"daisy@gmail.com"
+        "email":"daisy@gmail.com",
+        "user_id":"3"
     },
     {
         "username":"pearl",
         "password":"testing",
-        "email":"pearl@gmail.com"
+        "email":"pearl@gmail.com",
+        "user_id":"4"
+    },
+    {
+        "username":"tester",
+        "password":"testing",
+        "email":"tester@gmail.com",
+        "user_id":"5"
     }
 ]
