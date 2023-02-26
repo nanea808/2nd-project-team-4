@@ -1,3 +1,5 @@
+// group lists = users' wish lists
+
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -22,8 +24,8 @@ GroupList.init(
         list_id: {
             type: DataTypes.INTEGER,
             references: {
-              model: 'list',
-              key: 'id'
+                model: 'list',
+                key: 'id'
             }
         }
     },
@@ -35,5 +37,5 @@ GroupList.init(
         modelName: 'group_list',
     }
 );
-      
-    module.exports = GroupList;
+
+module.exports = GroupList;

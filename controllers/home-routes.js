@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
 //group page. Includes information for the selected group, including: the group owner and name along the top,
 //a list of guests on the side with those guests' lists as selectable fields, and the items on the selected user's list in the center/right of the view.
 //Owners have the option to add/remove users and delete the group. Users added to a group have to add a list to the group from the list page.
-//There is a button to select a random item for a specified group member.
+//There is a button to select a random item for a specified group member. (WIP)
 //Users have the option to change the status of a gift between unassigned, assigned, and purchased. List owners don't see the status of items on their list.
 router.get("/group/:id", async (req, res) => {
   const groupData = await Group.findByPk(req.params.id, {
@@ -62,7 +62,7 @@ router.get("/group/:id", async (req, res) => {
   }
 
   if (!user_belongs) {
-    res.send("You dont own this group.");
+    res.send("You don't own this group.");
     return;
   }
 
@@ -73,6 +73,43 @@ router.get("/group/:id", async (req, res) => {
     loggedIn: req.session.loggedIn,
     userID: req.session.userID,
   });
+});
+
+// add new group
+router.post('/', async (req, res) => {
+  try {
+    const newGroup = await Group.create({
+      where: {
+        title: req.params.title,
+        user_id: req.session.user_id,
+      }
+    });
+
+    res.status(200).json(newGroup);
+  } catch(err) {
+    res.status(400).json(err);
+  }
+});
+
+// delete group
+router.delete('/group/:id', async (req, res) => {
+  try {
+    const groupData = await Group.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!groupData) {
+      res.status(404).json({message: 'Group not found'});
+      return;
+    }
+
+    res.status(200).json(groupData);
+  } catch(err) {
+    res.status(500).json(err);
+  }
 });
 
 //list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.
