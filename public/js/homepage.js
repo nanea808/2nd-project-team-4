@@ -17,6 +17,32 @@ $(() => {
         }
     }
 
-    $('#groups-col').children().eq(1).click(redirectGroup);
-    $('#lists-col').children().eq(1).click(redirectList);
+    // show group and list add forms
+    function renderGroupForm() {
+        $('#addGroup-div').children().removeClass('visually-hidden');
+    };
+    
+    function renderListForm() {
+        $('#addList-div').children().removeClass('visually-hidden');
+    };
+
+    // create new group
+    // function createGroup() {
+    //     const newGroupTitle = $('#group-title').val().trim();
+    //     const inviteeName = $('#groupUser-name').val().trim();
+    //     const inviteeEmail = $('#groupUser-email').val().trim();
+    // };
+
+    // create new list
+    // function createList() {
+    // };
+    
+    $('#new-group-btn').click(renderGroupForm);
+    $('#new-list-btn').click(renderListForm);
+
+    // $('#new-group-save-btn').click(createGroup);
+    // $('#new-list-save-btn').click(createList);
+
+    $('#groups-col').children().eq(3).click(redirectGroup);
+    $('#lists-col').children().eq(3).click(redirectList);
 });
