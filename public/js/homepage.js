@@ -24,25 +24,42 @@ $(() => {
 });
 
 // add functionality to create new group and new list upon button click
+const newGroupBtn = document.querySelector('#new-group');
+const addGroupDiv = document.querySelector('#addGroup-div');
+const newListBtn = $('#new-list');
+const addListDiv = document.querySelector('#addList-div');
+
+// set form divs as hidden on default
+addGroupDiv.setAtrribute('hidden');
+addListDiv.setAtrribute('hidden');
 
 function createGroup() {
     const createGroupHandler = async(event) => {
         event.preventDefault();
-        const newGroupBtn = document.querySelector('#new-group');
-        
-        //on button click, render new group handlebars partial
+
+        // save group
     }
 };
+
+// render new group form partial on button click
+function renderGroupPartial() {
+    addGroupDiv.setAttribute('visible');
+};
+
+function renderListPartial() {
+    addListDiv.setAttribute('visible');
+}
 
 function createList() {
     const createListHandler = async(event) => {
         event.preventDefault();
-        const newListBtn = $('#new-list');
 
-        //on button click, render new list form
-        
+        // save list
     }
-}
+};
+
+newGroupBtn.on('click', renderGroupPartial);
+newListBtn.on('click', renderListPartial);
 
 document.querySelector('#new-group').addEventListener('submit', createGroup);
 
