@@ -25,7 +25,7 @@
         "description":"to sit in",
         "link":"",
         "status":"purchased",
-        "list_id":"3"
+        "list_id":"4"
     },
     {
         "title":"chew toy",
@@ -61,5 +61,26 @@
         "link":"toyota.com",
         "status":"assigned",
         "list_id":"1"
+    },
+    {
+        "title":"catnip mouse",
+        "description":"for chasing",
+        "link":"none",
+        "status":"assigned",
+        "list_id":"3"
+    },
+    {
+        "title":"scratching post",
+        "description": "for honing my claws",
+        "link": "none",
+        "status": "purchased",
+        "list_id": "3"
+    },
+    {
+        "title":"hair ties",
+        "description":"to chase",
+        "link":"none",
+        "status":"unassigned",
+        "list_id":"3"
     }
 ]
