@@ -1,5 +1,3 @@
-// group user = gift giver/invitee
-
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -24,8 +22,8 @@ GroupUser.init(
         user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
-                key: 'id'
+              model: 'user',
+              key: 'id'
             }
         }
     },
@@ -37,5 +35,5 @@ GroupUser.init(
         modelName: 'group_user',
     }
 );
-
-module.exports = GroupUser;
+      
+    module.exports = GroupUser;
