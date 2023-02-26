@@ -8,7 +8,7 @@
         <button id="new-group-btn" class="btn btn-dark" type="button">New Group</button>
       </div>
       {{!-- Render partial visible only when user clicks button --}}
-      <div class="container-fluid text-center">
+      <div class="container-fluid text-center" id="addGroup-div">
         {{> newGroupForm }}
       </div>
       <div class="row row-cols-2">
@@ -27,7 +27,7 @@
         <button id="new-list-btn" class="btn btn-dark" type="button">New Wish List</button>
       </div>
       {{!-- Render partial visible only when user clicks button --}}
-      <div class="container-fluid text-center">
+      <div class="container-fluid text-center" id="addList-div">
         {{> newListForm }}
       </div>
       <div class="row row-cols-2">
