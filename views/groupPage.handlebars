@@ -1,92 +1,66 @@
 {{! List those peeps! }}
-<div class="container-fluid bg-light">
-  <h2 class="text-uppercase">{{group.title}}</h2>
-  <div>
+<div class="container-fluid bg-light bg-gradient">
+  <h2 class="text-uppercase text-secondary">{{group.title}}</h2>
+  <div class="d-grid gap-2 col-8 mx-auto">
     <ul class="list-group">
       {{#each group.users as |user|}}
         {{#if user}}
           <li
             data-user="{{user.id}}"
-            class="list-group-item font-weight-bold text-center"
+            class="list-group-item font-weight-bold text-center btn btn-success py-3" type="button"
           >
             {{user.username}}
           </li>
         {{/if}}
       {{/each}}
     </ul>
+    <span class="border-bottom border-black-50 border-3"></span>
   </div>
-</div>
+
 {{! Cards for items :) }}
-{{! Left column }}
-<div class="container-fluid">
-  <div class="row">
+{{! Title}}
     <div id="lists" class="col">
       {{#each group.lists as |list|}}
         <div data-owner="{{list.user_id}}" style="display: none">
-          <h2>{{list.title}}</h2>
-          {{#each list.items as |item|}}
-            <div class="card">
-              <p class="card-block"> {{item.title}} </p>
-              {{!-- <img class="card-img-bottom" src="" alt="Card image cap" /> --}}
-              <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+          <h3 class="text-uppercase text-secondary">{{list.title}}</h3>
+          {{!-- item cards --}}
+          <div class="mx-auto">
+            <div class="card-deck">
+                <div class="row">
+                    {{!-- Items in list --}}
+                    {{#each list.items as |item|}}
+                    <div class="col-4 m-2">
+                        <div class="card align-items-center text-center g-3 shadow p-3 mb-5 bg-body rounded" style="width: 18rem">
+                            <div class="card-body">
+                                <h5 class="card-title ">{{item.title}}</h5>
+                                {{#if item.description}}
+                                    <p class="card-text">{{item.description}}</p>
+                                {{/if}}
+                                {{#if item.link}}
+                                    <a href="{{item.link}}" target="_blank" rel='noreferrer' class="card-link">Link to Product</a>
+                                {{/if}}
+                                <button id="item-del-btn-{{item.id}}" type="button" data-item_id="{{item.id}}" class="btn btn-danger">X</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    </div>
             </div>
-          {{/each}}
+          </div>
         </div>
       {{/each}}
-
     </div>
-
-    {{! Center column }}
-    {{!-- <div class="col">
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div>
-    {{! Right column }}
-    <div class="col">
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="card">
-        <p class="card-block">  </p>
-        <img class="card-img-bottom" src="" alt="Card image cap" />
-        <button type="button" class="close" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-    </div> --}}
-  </div>
 </div>
+{{!-- Card class template --}}
+{{!-- 
+ <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> --}}
+
 
 <script src="/js/groupPage.js"></script>
