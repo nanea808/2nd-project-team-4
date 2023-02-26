@@ -23,5 +23,10 @@
         "title":"Pearl's Gift Exchange",
         "owning_user_id":"4",
         "group_id":"5"
+    },
+    {
+        "title":"Tester's Testy Testing",
+        "owning_user_id":"5",
+        "group_id":"6"
     }
 ]
