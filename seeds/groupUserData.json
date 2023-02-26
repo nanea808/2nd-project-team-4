@@ -1,42 +1,92 @@
 [
     {
         "group_id":"1",
-        "user_id":"1"
-    },
-    {
-        "group_id":"1",
+        "group_title":"Sarah's Birthday Party",
         "user_id":"2"
     },
     {
         "group_id":"1",
+        "group_title":"Sarah's Birthday Party",
+        "user_id":"3"
+    },
+    {
+        "group_id":"1",
+        "group_title":"Sarah's Birthday Party",
+        "user_id":"4"
+    },
+    {
+        "group_id":"2",
+        "group_title":"Sarah's Holiday Party",
+        "user_id":"2"
+    },
+    {
+        "group_id":"2",
+        "group_title":"Sarah's Holiday Party",
         "user_id":"3"
     },
     {
         "group_id":"2",
-        "user_id":"2"
+        "group_title":"Sarah's Holiday Party",
+        "user_id":"4"
+    },
+    {
+        "group_id":"2",
+        "group_title":"Sarah's Holiday Party",
+        "user_id":"5"
     },
     {
         "group_id":"3",
-        "user_id":"3"
-    },
-    {
-        "group_id":"3",
+        "group_title":"Reg's Housewarming",
         "user_id":"1"
     },
     {
         "group_id":"3",
+        "group_title":"Reg's Housewarming",
+        "user_id":"2"
+    },
+    {
+        "group_id":"3",
+        "group_title":"Reg's Housewarming",
+        "user_id":"5"
+    },
+    {
+        "group_id":"4",
+        "group_title":"Daisy's Secret Santa Party",
+        "user_id":"1"
+    },
+    {
+        "group_id":"4",
+        "group_title":"Daisy's Secret Santa Party",
         "user_id":"2"
     },
     {
         "group_id":"4",
+        "group_title":"Daisy's Secret Santa Party",
         "user_id":"4"
     },
     {
-        "group_id":"6",
+        "group_id":"4",
+        "group_title":"Daisy's Secret Santa Party",
+        "user_id":"5"
+    },
+    {
+        "group_id":"5",
+        "group_title":"Pearl's Gift Exchange",
         "user_id":"1"
     },
     {
         "group_id":"5",
+        "group_title":"Pearl's Gift Exchange",
+        "user_id":"3"
+    },
+    {
+        "group_id":"6",
+        "group_title":"Tester's Testy Testing",
         "user_id":"1"
+    },
+    {
+        "group_id":"6",
+        "group_title":"Tester's Testy Testing",
+        "user_id":"4"
     }
 ]
