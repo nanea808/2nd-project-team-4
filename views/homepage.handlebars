@@ -1,8 +1,16 @@
+
 <div class="container-fluid text-center">
   <div class="row row-cols-2">
     {{! groups column }}
     <div id="groups-col" class="col">
       <h1>Groups</h1>
+      <div class="container-fluid align-items-center">
+        <button id="new-group-btn" class="btn btn-dark" type="button">New Group</button>
+      </div>
+      {{!-- Render partial visible only when user clicks button --}}
+      <div class="container-fluid text-center" id="addGroup-div">
+        {{> newGroupForm }}
+      </div>
       <div class="row row-cols-2">
         {{#each groups as |group|}}
           <div class="col">
@@ -11,9 +19,17 @@
         {{/each}}
       </div>
     </div>
+
     {{! list column }}
     <div id="lists-col" class="col">
       <h1>Lists</h1>
+            <div class="container-fluid align-items-center">
+        <button id="new-list-btn" class="btn btn-dark" type="button">New Wish List</button>
+      </div>
+      {{!-- Render partial visible only when user clicks button --}}
+      <div class="container-fluid text-center" id="addList-div">
+        {{> newListForm }}
+      </div>
       <div class="row row-cols-2">
         {{#each lists as |list|}}
           <div class="col">
