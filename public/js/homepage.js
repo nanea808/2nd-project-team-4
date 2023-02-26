@@ -1,5 +1,3 @@
-const { create } = require("handlebars");
-
 $(() => {
     const redirectGroup = (event) => {
         const element = event.target;
@@ -19,39 +17,34 @@ $(() => {
         }
     }
 
-    $('#groups-col').children().eq(1).click(redirectGroup);
-    $('#lists-col').children().eq(1).click(redirectList);
+    // show group and list add forms
+    function renderGroupForm() {
+        $('#addGroup-div').children().removeClass('visually-hidden');
+    };
+    
+    function renderListForm() {
+        $('#addList-div').children().removeClass('visually-hidden');
+    };
+
+    // create new group
+    function createGroup() {
+        const newGroupTitle = $('#group-title').val().trim();
+        const inviteeName = $('#groupUser-name').val().trim();
+        const inviteeEmail = $('#groupUser-email').val().trim();
+    };
+
+    // create new list
+    function createList() {
+    };
+    
+    $('#new-group-btn').click(renderGroupForm);
+    $('#new-list-btn').click(renderListForm);
+
+    $('#new-group-save-btn').click(createGroup);
+    $('#new-list-save-btn').click(createList);
+
+    $('#groups-col').children().eq(3).click(redirectGroup);
+    $('#lists-col').children().eq(3).click(redirectList);
 });
 
 
-// add functionality to create new group and new list upon button click
-const newGroupBtn = document.querySelector('#new-group');
-const addGroupDiv = document.querySelector('#addGroup-div');
-
-const newListBtn = $('#new-list');
-const addListDiv = document.querySelector('#addList-div');
-
-function renderGroupForm() {
-    addGroupDiv.setAttribute('class', 'container-fluid text-center')
-};
-
-newGroupBtn.on('click', renderGroupForm);
-
-function createGroup() {
-    const createGroupHandler = async(event) => {
-        event.preventDefault();
-
-        // save group
-    }
-};
-
-function createList() {
-    const createListHandler = async(event) => {
-        event.preventDefault();
-
-        // save list
-    }
-};
-
-document.querySelector('#new-group').addEventListener('submit', createGroup);
-document.querySelector('#new-list').addEventListener('submit', createList)
