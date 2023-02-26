@@ -27,22 +27,22 @@ $(() => {
     };
 
     // create new group
-    function createGroup() {
-        const newGroupTitle = $('#group-title').val().trim();
-        const inviteeName = $('#groupUser-name').val().trim();
-        const inviteeEmail = $('#groupUser-email').val().trim();
-    };
+    // function createGroup() {
+    //     const newGroupTitle = $('#group-title').val().trim();
+    //     const inviteeName = $('#groupUser-name').val().trim();
+    //     const inviteeEmail = $('#groupUser-email').val().trim();
+    // };
 
     // create new list
-    function createList() {
-    };
+    // function createList() {
+    // };
     
     $('#new-group-btn').click(renderGroupForm);
     $('#new-list-btn').click(renderListForm);
 
-    $('#new-group-save-btn').click(createGroup);
-    $('#new-list-save-btn').click(createList);
+    // $('#new-group-save-btn').click(createGroup);
+    // $('#new-list-save-btn').click(createList);
 
-    $('#groups-col').children().eq(1).click(redirectGroup);
-    $('#lists-col').children().eq(1).click(redirectList);
+    $('#groups-col').children().eq(3).click(redirectGroup);
+    $('#lists-col').children().eq(3).click(redirectList);
 });
