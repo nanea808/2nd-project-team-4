@@ -2,7 +2,7 @@
     {
         "username":"sarahkh",
         "password":"testing",
-        "email":"sarah.k.hopper@gmail.com"
+        "email":"sarah@gmail.com"
     },
     {
         "username":"reggums",
@@ -18,5 +18,10 @@
         "username":"pearl",
         "password":"testing",
         "email":"pearl@gmail.com"
+    },
+    {
+        "username":"tester",
+        "password":"testing",
+        "email":"tester@gmail.com"
     }
 ]
