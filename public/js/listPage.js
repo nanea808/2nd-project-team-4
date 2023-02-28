@@ -60,27 +60,26 @@
     }
 
     //add list to group
-    // async function addToGroup(event){
-    //   event.preventDefault();
+    async function addToGroup(event){
+      event.preventDefault();
 
-    //   const title = $('#item-title').val().trim();
-    //   const list_id = $(this).data('list_id');
+      const group_id = $('#add-group').val();
+      const list_id = $(this).data('list_id');
       
-    //   if (title) {   
-    //     const response = await fetch("/api/items", {
-    //       method: "POST",
-    //       body: JSON.stringify({ title, description, link, status, list_id }),
-    //       headers: { "Content-Type": "application/json" },
-    //     });
+        const response = await fetch("/api/groupList", {
+          method: "POST",
+          body: JSON.stringify({ list_id, group_id }),
+          headers: { "Content-Type": "application/json" },
+        });
   
-    //     if (response.ok) {
-    //       location.reload();
-    //     } else {
-    //       alert("Failed to add to a group.");
-    //     }
-    //   }
-    // };
+        if (response.ok) {
+          location.reload();
+        } else {
+          alert("Failed to add to the selected group.");
+        }
+    };
 
+    $("#group-form").submit(addToGroup);
     $("#item-form").submit(newItem);
     $("button[id^='item-del-btn']").click(deleteItem);
     $("button[id^='group-del-btn']").click(updateGroups);

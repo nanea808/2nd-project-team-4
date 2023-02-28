@@ -11,16 +11,19 @@
                     <button type="button" id="group-del-btn-{{group.id}}" data-group_id="{{group.id}}" data-list_id="{{group.GroupList.list_id}}" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
-                <label for="groups">Add to a group:</label>
-                <select name="addGroup" id="addGroup">
-                    <optgroup label="Your groups">
-                        {{#each groups as |group|}}
-                            {{#unless (list_group_checker ../list.groups group.id)}}
-                            <option value="{{group.title}}">{{group.title}}</option>
-                            {{/unless}}
-                        {{/each}}
-                    </optgroup>
-                </select> 
+                <form id="group-form" data-list_id="{{list.id}}" class="form-group form-group-sm">
+                    <label for="groups">Add to a group:</label>
+                    <select name="addGroup" id="add-group">
+                        <optgroup label="Your groups">
+                            {{#each groups as |group|}}
+                                {{#unless (list_group_checker ../list.groups group.id)}}
+                                <option value="{{group.id}}">{{group.title}}</option>
+                                {{/unless}}
+                            {{/each}}
+                        </optgroup>
+                    </select> 
+                    <button id="group-submit-btn" class="btn btn-dark mx-1" data-list_id= "{{list.id}}" type="submit"> Submit </button>
+                </form>
         </div>
 
 

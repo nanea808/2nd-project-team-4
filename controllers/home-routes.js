@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
     });
     const groups = groupData.map((group) => group.get({ plain: true }));
 
-    console.log(groups);
     // Get lists based on logged in users ID
     const listData = await List.findAll({
       where: {
@@ -65,8 +64,6 @@ router.get("/group/:id", async (req, res) => {
     res.send("You dont own this group.");
     return;
   }
-
-  console.log(group);
 
   res.render("groupPage", {
     group,
@@ -119,7 +116,6 @@ router.get("/list/:id", async (req, res) => {
     res.send(`You don't have access to that list.`);
     return;
   } else {
-    console.log(groups);
     res.render("listPage", { list, groups, loggedIn: req.session.loggedIn });
   }
 });
