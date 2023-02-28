@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -43,3 +42,5 @@ passport.deserializeUser(async (id, done) => {
         console.log('deserialize error');
     }
 });
+
+module.export('auth');
