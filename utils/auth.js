@@ -43,4 +43,24 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-module.export('auth');
+// fxns to check user auth status
+const loggedIn = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.json({message: 'Could not authenticate. Please log in again.'});
+        return res.render('/login'); //redirect to login if not logged in
+};
+
+const notLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.json({message: 'Please log in to continue.'});
+        return res.render('/login');
+};
+
+module.exports = {
+    loggedIn: (req, res, next) => {},
+    notLoggedIn: (req, res, next) => {}
+};

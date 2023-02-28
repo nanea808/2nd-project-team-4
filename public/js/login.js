@@ -3,6 +3,8 @@
     event.preventDefault();
     const email = document.querySelector("#login-email").value.trim();
     const password = document.querySelector("#login-password").value.trim();
+    // const { loggedIn, notLoggedIn } = require('../../utils/auth');
+    const auth = require('../../utils/auth'); // import auth fxns to incorporate into login
 
     if (email && password) {
       const response = await fetch("/api/users/login", passport.authenticate('local', { failureRedirect: '/login', failureFlash: true}), {

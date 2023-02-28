@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const router = require("express").Router();
 const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
+const { loggedIn, notLoggedIn } = require('../utils/auth'); // import passport helpers fxn since authentication happens on homepage route
 
 //homepage. Includes all groups a user is a part of, and all lists the user has made.
 //Page includes options to: login/logout, select a group, select a list, and create a list/group.
