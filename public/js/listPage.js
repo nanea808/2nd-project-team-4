@@ -41,7 +41,7 @@
       }
     }
 
-    //remove a group
+    //remove from a group
     async function updateGroups(event) {
       event.preventDefault();
       const group_id = $(this).data('group_id');
@@ -59,12 +59,29 @@
       }
     }
 
-    //async f addToGroup
-    //need to 
+    //add list to group
+    // async function addToGroup(event){
+    //   event.preventDefault();
+
+    //   const title = $('#item-title').val().trim();
+    //   const list_id = $(this).data('list_id');
+      
+    //   if (title) {   
+    //     const response = await fetch("/api/items", {
+    //       method: "POST",
+    //       body: JSON.stringify({ title, description, link, status, list_id }),
+    //       headers: { "Content-Type": "application/json" },
+    //     });
+  
+    //     if (response.ok) {
+    //       location.reload();
+    //     } else {
+    //       alert("Failed to add to a group.");
+    //     }
+    //   }
+    // };
 
     $("#item-form").submit(newItem);
     $("button[id^='item-del-btn']").click(deleteItem);
     $("button[id^='group-del-btn']").click(updateGroups);
   })();
-
-  // front-end logic sending requests to delete lists from groups and items from lists. Form for adding items to a list. Add-to-group function.=

@@ -3,7 +3,7 @@
         
         <h3>{{list.title}}</h3>
 
-        <div class="col-2">
+        <div class="col-3">
             <h4>Groups:</h4>
             <ol>
                 {{#each list.groups as |group|}}
@@ -11,10 +11,20 @@
                     <button type="button" id="group-del-btn-{{group.id}}" data-group_id="{{group.id}}" data-list_id="{{group.GroupList.list_id}}" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
+                <label for="groups">Add to a group:</label>
+                <select name="addGroup" id="addGroup">
+                    <optgroup label="Your groups">
+                        {{#each groups as |group|}}
+                            {{#unless (list_group_checker ../list.groups group.id)}}
+                            <option value="{{group.title}}">{{group.title}}</option>
+                            {{/unless}}
+                        {{/each}}
+                    </optgroup>
+                </select> 
         </div>
 
 
-        <div class="col-10">
+        <div class="col-9">
             <div class="card-deck">
                 <div class="row">
                     {{!-- Items in list --}}

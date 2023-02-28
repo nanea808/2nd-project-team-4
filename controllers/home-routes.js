@@ -94,12 +94,34 @@ router.get("/list/:id", async (req, res) => {
     res.json(err);
   });
 
+  const groupData = await Group.findAll({
+    include: [
+      {
+      model: User, through: { model: GroupUser },
+      where: {
+        id: req.session.userID,
+      }},
+      // {
+      //   model: List, through: {model: GroupList},
+      //   where: {
+      //     list_id: req.params.id
+      //   }
+      // }
+    ]
+  }).catch((err) => {
+    res.json(err);
+  });
+
+  const groups = groupData.map((group) => group.get({ plain: true }));
   const list = listData.get({ plain: true });
 
   if (req.session.userID !== list.user_id) {
     res.send(`You don't have access to that list.`);
     return;
-  } else res.render("listPage", { list, loggedIn: req.session.loggedIn });
+  } else {
+    console.log(groups);
+    res.render("listPage", { list, groups, loggedIn: req.session.loggedIn });
+  }
 });
 
 router.get("/login", async (req, res) => {
