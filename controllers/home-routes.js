@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
     });
     const groups = groupData.map((group) => group.get({ plain: true }));
 
-    console.log(groups);
     // Get lists based on logged in users ID
     const listData = await List.findAll({
       where: {
@@ -66,8 +65,6 @@ router.get("/group/:id", async (req, res) => {
     return;
   }
 
-  console.log(group);
-
   res.render("groupPage", {
     group,
     loggedIn: req.session.loggedIn,
@@ -94,12 +91,33 @@ router.get("/list/:id", async (req, res) => {
     res.json(err);
   });
 
+  const groupData = await Group.findAll({
+    include: [
+      {
+      model: User, through: { model: GroupUser },
+      where: {
+        id: req.session.userID,
+      }},
+      // {
+      //   model: List, through: {model: GroupList},
+      //   where: {
+      //     list_id: req.params.id
+      //   }
+      // }
+    ]
+  }).catch((err) => {
+    res.json(err);
+  });
+
+  const groups = groupData.map((group) => group.get({ plain: true }));
   const list = listData.get({ plain: true });
 
   if (req.session.userID !== list.user_id) {
     res.send(`You don't have access to that list.`);
     return;
-  } else res.render("listPage", { list, loggedIn: req.session.loggedIn });
+  } else {
+    res.render("listPage", { list, groups, loggedIn: req.session.loggedIn });
+  }
 });
 
 router.get("/login", async (req, res) => {

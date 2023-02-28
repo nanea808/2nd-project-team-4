@@ -14,6 +14,7 @@ GroupList.init(
         },
         group_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'group',
                 key: 'id'
@@ -21,6 +22,7 @@ GroupList.init(
         },
         list_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
               model: 'list',
               key: 'id'
