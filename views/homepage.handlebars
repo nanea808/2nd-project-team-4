@@ -4,6 +4,18 @@
     {{! groups column }}
     <div id="groups-col" class="col g-light m-1 py-2">
       <h1 class="text-secondary display-6">Groups</h1>
+      
+      {{!-- button to show add-group form --}}
+      <div class="container-fluid align-items-center">
+        <button id="new-group-btn" class="btn btn-dark" type="button"> 
+            New Group 
+        </button>
+      </div>
+      {{!-- add-group form partial, rendered on button click --}}
+        <div class="container-fluid text-center" id="addGroup-div">
+          {{> newGroupForm }}
+        </div>
+      
       <div class="row row-cols-2 g-3">
         {{#each groups as |group|}}
           <div class="col">
@@ -16,6 +28,18 @@
     {{! list column }}
     <div id="lists-col" class="col g-light m-1 py-2">
       <h1 class="text-secondary display-6">Lists</h1>
+      
+      {{!-- button to show add-list form --}}
+      <div class="container-fluid align-items-center">
+        <button id="new-list-btn" class="btn btn-dark" type="button">
+            New List
+        </button>
+      </div>
+      {{!-- add-list form partial, rendered on button click --}}
+        <div class="container-fluid text-center" id="addList-div">
+          {{> newListForm }}
+        </div>
+      
       <div class="row row-cols-2 g-3">
         {{#each lists as |list|}}
           <div class="col">
