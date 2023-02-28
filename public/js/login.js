@@ -15,6 +15,7 @@
         document.location = "/";
       } else {
         alert("Could not log in. Please try again.");
+      
       }
     }
   };
@@ -48,5 +49,3 @@
 
   $("#signup-form").submit(signUp);
 })();
-
-// example route using passport authentication:
