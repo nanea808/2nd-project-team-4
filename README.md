@@ -10,5 +10,5 @@ In the future, we hope to add a random choice feature allowing users to pick an 
 
 ## Installation
 
-Please visit the deployed app on Heroku []() to use Present Pear.
+Please visit the deployed app on Heroku [here](https://present-pear.herokuapp.com/) to use Present Pear.
 
