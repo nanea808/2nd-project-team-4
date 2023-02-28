@@ -26,38 +26,27 @@ $(() => {
         $('#addList-div').children().removeClass('visually-hidden');
     };
 
-    // create new group
-    // const { Group, User, GroupUser, GroupList, List } = require('../../models');
-    // const router = require('express').Router();
+// create new group
+router.post('/', async (req, res) => {
+    const express = require('express');
+    const { User, Group, GroupUser } = require('../../models');
 
-    // function createGroup() {
-    //     const group_title = $('#group-title').val().trim();
-    //     const groupUser = $('#groupUser-name').val().trim();
-    //     // const email = $('#groupUser-email').val().trim(); // users need to be registered and logged in to look at their groups, but we don't currently have functionality to send email invites to users to join group and/or register if they don't already have an account. 
+    try {
+        const { title, memberEmail } = req.body;
 
-    //     router.post('/', async (req, res) => {
-    //         const response = await Group.create(req.body, {
-    //             where: {
-    //                 owning_user_id: req.session.userID,
-    //                 title: group_title,
-    //             },
-    //             include: [
-    //                 { model: GroupUser, where: { user_id: groupUser } }, // how do we make sure group_id gets assigned to groupuser? where: group_id: this.req.id or something along those lines?
-    //                 // { model: GroupList, through: { model: Group, where: { } } },
-    //             ],
-    //             // headers: {
-    //             //     'Content-Type': 'application/json'
-    //             // }
-    //         });
+        const user = await User.findOne({ where: { id: req.user.id } });
+        const newGroup = await Group.create({ title, description, owning_user_id: user.id }); // Create a new instance of the Group model and associate it with the logged-in user
 
-    //         if (response.ok) {
-    //             document.location.reload('/');
-    //         } else {
-    //             alert('Could not create new group.');
-    //             console.log('Error: couldn not create new group.');
-    //         }
-    //     });
-    // };
+        const [member, created] = await User.findOrCreate({ where: { name: groupUser } }); // find or create a new instance of the User model based on the given member name. Should change to email instead but unsure if we want to create new user since we don't have a way to invite someone to join by email at this point.
+
+        await newGroup.addUser(member); // associate the new group instance with the member (groupUser)
+
+        res.status(200).send({ message: 'New group created successfully' });
+    } catch (error) {
+        res.status(500).send({ message: 'Failed to create new group' });
+    }
+    });
+// });
 
     // create new list
     // function createList() {
@@ -66,7 +55,7 @@ $(() => {
     $('#new-group-btn').click(renderGroupForm);
     $('#new-list-btn').click(renderListForm);
 
-    // $('#new-group-save-btn').click(createGroup);
+    $('#new-group-save-btn').click(createGroup);
     // $('#new-list-save-btn').click(createList);
 
     $('#groups-col').children().eq(3).click(redirectGroup);
