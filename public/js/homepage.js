@@ -34,14 +34,32 @@ $(() => {
     // };
 
     // create new list
-    // function createList() {
-    // };
+    async function createList(event) {
+        event.preventDefault();
+
+        const title = $('#list-title').val().trim();
+        const user_id = $(this).data("user_id");
+
+        if (title) {
+            const response = await fetch("/api/lists", {
+              method: "POST",
+              body: JSON.stringify({ title, user_id}),
+              headers: { "Content-Type": "application/json" },
+            });
+      
+            if (response.ok) {
+              location.reload();
+            } else {
+              alert("Failed to create a list.");
+            }
+          }
+    };
     
     $('#new-group-btn').click(renderGroupForm);
     $('#new-list-btn').click(renderListForm);
-
+    $('#new-list-form').submit(createList);
     // $('#new-group-save-btn').click(createGroup);
-    // $('#new-list-save-btn').click(createList);
+
 
     $('#groups-col').children().eq(3).click(redirectGroup);
     $('#lists-col').children().eq(3).click(redirectList);

@@ -3,7 +3,7 @@ const router = require("express").Router();
 const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
 //homepage. Includes all groups a user is a part of, and all lists the user has made.
-//Page includes options to: login/logout, select a group, select a list, and create a list/group.
+//Page includes options to: login/logout, select a group, select a list, create a list/group, and delete a list/group.
 router.get("/", async (req, res) => {
   // Get groups based on logged in users ID
   if (req.session.loggedIn) {
@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
     });
     const lists = listData.map((list) => list.get({ plain: true }));
 
-    res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn });
+    res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn, user_id: req.session.userID });
   } else {
     res.render("login");
   }
