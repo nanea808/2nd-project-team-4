@@ -37,8 +37,9 @@
                                     <p class="card-text">{{item.description}}</p>
                                 {{/if}}
                                 {{#if item.link}}
-                                    <a href="{{item.link}}" target="_blank" rel='noreferrer' class="card-link">Link to Product</a>
+                                    <a href="{{item.link}}" target="_blank" rel='external' class="card-link">Link to Product</a>
                                 {{/if}}
+                                <button type="button" data-item_id="{{item.id}}" class="btn btn-dark claim-btn">Claim</button>
                                 <button id="item-del-btn-{{item.id}}" type="button" data-item_id="{{item.id}}" class="btn btn-danger">X</button>
                             </div>
                         </div>
