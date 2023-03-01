@@ -81,7 +81,9 @@ router.post('/', async (req, res) => {
         });
   });
 
-//put to update a group (change name)
+//put to update a group (change name, add/remove users.)
+//add/remove requires security to confirm user owns group.
+
 //delete to delete a group
 
 module.exports = router;
