@@ -26,11 +26,27 @@ $(() => {
     };
 
     // create new group
-    // function createGroup() {
-    //     const newGroupTitle = $('#group-title').val().trim();
-    //     const inviteeName = $('#groupUser-name').val().trim();
-    //     const inviteeEmail = $('#groupUser-email').val().trim();
-    // };
+    async function createGroup(event) {
+        event.preventDefault();
+
+        const title = $('#group-title').val().trim();
+        const description = $('#group-description').val().trim();
+        const owning_user_id = $(this).data("user_id");
+
+        if (title && owning_user_id) {
+            const response = await fetch("/api/groups", {
+              method: "POST",
+              body: JSON.stringify({ title, description, owning_user_id}),
+              headers: { "Content-Type": "application/json" },
+            });
+
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert("Failed to create a list.");
+        }
+        }
+    };
 
     // delete group
     async function deleteGroup(event) {
@@ -95,11 +111,11 @@ $(() => {
     $('#new-group-btn').click(renderGroupForm);
     $('#new-list-btn').click(renderListForm);
     $('#new-list-form').submit(createList);
+    $('#new-group-form').submit(createGroup);
     $('#list-delete-form').submit(deleteList);
     $('#group-delete-form').submit(deleteGroup);
-    // $('#new-group-save-btn').click(createGroup);
 
 
-    $('#groups-col').children().eq(3).click(redirectGroup);
+    $('#groups-col').children().eq(4).click(redirectGroup);
     $('#lists-col').children().eq(4).click(redirectList);
 });

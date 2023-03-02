@@ -16,13 +16,18 @@
           {{> newGroupForm }}
         </div>
       {{!-- remove group form --}}
-      {{#if groups}}
+      {{#if ownedGroups}}
         <div class="container-fluid text-center" id="deleteGroup-div">
           {{> deleteGroupForm }}
         </div>
       {{/if}}
       
       <div class="row row-cols-2 g-3">
+        {{#each ownedGroups as |group|}}
+          <div class="col">
+            <p class="btn btn-outline-success p-3" data-group-id="{{group.id}}">{{group.title}}</p>
+          </div>
+        {{/each}}
         {{#each groups as |group|}}
           <div class="col">
             <p class="btn btn-outline-success p-3" data-group-id="{{group.id}}">{{group.title}}</p>

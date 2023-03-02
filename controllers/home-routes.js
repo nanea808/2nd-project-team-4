@@ -64,14 +64,14 @@ router.get("/group/:id", async (req, res) => {
   let user_belongs = false;
 
   for (const user in group.users) {
-    if (group.users[user].id === req.session.userID) {
+    if (group.users[user].id === req.session.userID || group.owning_user_id === req.session.userID) {
       delete group.users[user];
       user_belongs = true;
     }
   }
 
   if (!user_belongs) {
-    res.send("You dont own this group.");
+    res.send("You don't own this group.");
     return;
   }
 

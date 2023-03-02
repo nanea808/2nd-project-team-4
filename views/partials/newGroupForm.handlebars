@@ -1,9 +1,10 @@
 <div class="container-fluid text-center visually-hidden">
-    <form id="new-group-form">
+    <form id="new-group-form" data-user_id="{{user_id}}">
         <div class="form-group row">
             <label for="group-title" class="col-sm-2 col-form-label">Group Title</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="group-title" placeholder="Your group's name or event's title here">
+                <textarea id="group-description" type="description" class="form-control" rows="3" placeholder="Description (optional)"></textarea>
             </div>
             <div class="col-sm-2">
                 <button type="submit" class="btn btn-dark" id="new-group-save-btn">Save</button>
