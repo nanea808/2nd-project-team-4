@@ -15,6 +15,12 @@
         <div class="container-fluid text-center" id="addGroup-div">
           {{> newGroupForm }}
         </div>
+      {{!-- remove group form --}}
+      {{#if groups}}
+        <div class="container-fluid text-center" id="deleteGroup-div">
+          {{> deleteGroupForm }}
+        </div>
+      {{/if}}
       
       <div class="row row-cols-2 g-3">
         {{#each groups as |group|}}

@@ -32,6 +32,25 @@ $(() => {
     //     const inviteeEmail = $('#groupUser-email').val().trim();
     // };
 
+    // delete group
+    async function deleteGroup(event) {
+        event.preventDefault();
+
+        const group_id =  $('#delete-group').val();
+
+        const response = await fetch(`/api/groups/${group_id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+        });
+    
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert("Failed to delete a list.");
+        }
+    
+    };
+
     // create new list
     async function createList(event) {
         event.preventDefault();
@@ -77,6 +96,7 @@ $(() => {
     $('#new-list-btn').click(renderListForm);
     $('#new-list-form').submit(createList);
     $('#list-delete-form').submit(deleteList);
+    $('#group-delete-form').submit(deleteGroup);
     // $('#new-group-save-btn').click(createGroup);
 
 

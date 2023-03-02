@@ -20,6 +20,16 @@ router.get("/", async (req, res) => {
     });
     const groups = groupData.map((group) => group.get({ plain: true }));
 
+    // Get owned groups based on logged in users ID
+    const ownedGroupData = await Group.findAll({
+        where: {
+          owning_user_id: req.session.userID,
+        },
+    }).catch((err) => {
+      res.json(err);
+    });
+    const ownedGroups = ownedGroupData.map((group) => group.get({ plain: true }));
+
     // Get lists based on logged in users ID
     const listData = await List.findAll({
       where: {
@@ -30,7 +40,7 @@ router.get("/", async (req, res) => {
     });
     const lists = listData.map((list) => list.get({ plain: true }));
 
-    res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn, user_id: req.session.userID });
+    res.render("homepage", { groups, lists, ownedGroups, loggedIn: req.session.loggedIn, user_id: req.session.userID });
   } else {
     res.render("login");
   }
