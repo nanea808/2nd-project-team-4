@@ -1,0 +1,11 @@
+      <form id="list-delete-form" data-user_id="{{user_id}}" class="form-group form-group-sm">
+          <label for="lists">Delete a List:</label>
+          <select name="deleteList" id="delete-list">
+              <optgroup label="Your lists">
+                  {{#each lists as |list|}}
+                      <option value="{{list.id}}">{{list.title}}</option>
+                  {{/each}}
+              </optgroup>
+          </select> 
+          <button id="list-delete-submit-btn" class="btn btn-dark mx-1" type="submit"> Submit </button>
+      </form>

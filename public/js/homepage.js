@@ -10,7 +10,6 @@ $(() => {
 
     const redirectList = (event) => {
         const element = event.target;
-        
         if (element.matches("p")) {
             document.location = `/list/${element.dataset.listId}`
             // console.log(element.dataset.groupId);
@@ -55,12 +54,32 @@ $(() => {
           }
     };
     
+    // delete list
+    async function deleteList(event) {
+        event.preventDefault();
+
+        const list_id =  $('#delete-list').val();
+
+        const response = await fetch(`/api/lists/${list_id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+        });
+    
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert("Failed to delete a list.");
+        }
+    
+    };
+
     $('#new-group-btn').click(renderGroupForm);
     $('#new-list-btn').click(renderListForm);
     $('#new-list-form').submit(createList);
+    $('#list-delete-form').submit(deleteList);
     // $('#new-group-save-btn').click(createGroup);
 
 
     $('#groups-col').children().eq(3).click(redirectGroup);
-    $('#lists-col').children().eq(3).click(redirectList);
+    $('#lists-col').children().eq(4).click(redirectList);
 });

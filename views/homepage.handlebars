@@ -35,11 +35,19 @@
             New List
         </button>
       </div>
+
       {{!-- add-list form partial, rendered on button click --}}
-        <div class="container-fluid text-center" id="addList-div">
-          {{> newListForm }}
-        </div>
+      <div class="container-fluid text-center" id="addList-div">
+        {{> newListForm }}
+      </div>
       
+      {{!-- remove list form --}}
+      {{#if lists}}
+        <div class="container-fluid text-center" id="deleteList-div">
+          {{> deleteListForm }}
+        </div>
+      {{/if}}
+
       <div class="row row-cols-2 g-3">
         {{#each lists as |list|}}
           <div class="col">

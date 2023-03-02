@@ -1,6 +1,7 @@
 <div class="container text-center">
     <div class="row align-items-center">
         
+        {{!-- list, change title --}}
         <h3>{{list.title}}</h3>
         <button type="button" id="list-title-btn" class="btn btn-dark mx-1">Change title</button>
         <div class="container-fluid text-center visually-hidden" id="listFormDiv">
@@ -10,30 +11,35 @@
           </form>
         </div>
 
+        {{!-- groups --}}
         <div class="col-3">
             <h4>Groups:</h4>
+
+            {{!-- remove from group --}}
             <ol>
                 {{#each list.groups as |group|}}
                     <li>{{group.title}}</li>
                     <button type="button" id="group-del-btn-{{group.id}}" data-group_id="{{group.id}}" data-list_id="{{group.GroupList.list_id}}" class="btn btn-danger">Remove Group</button>
                 {{/each}}
             </ol>
-                <form id="group-form" data-list_id="{{list.id}}" class="form-group form-group-sm">
-                    <label for="groups">Add to a group:</label>
-                    <select name="addGroup" id="add-group">
-                        <optgroup label="Your groups">
-                            {{#each groups as |group|}}
-                                {{#unless (list_group_checker ../list.groups group.id)}}
-                                <option value="{{group.id}}">{{group.title}}</option>
-                                {{/unless}}
-                            {{/each}}
-                        </optgroup>
-                    </select> 
-                    <button id="group-submit-btn" class="btn btn-dark mx-1" data-list_id= "{{list.id}}" type="submit"> Submit </button>
-                </form>
+
+            {{!-- add to groups --}}
+            <form id="group-form" data-list_id="{{list.id}}" class="form-group form-group-sm">
+                <label for="groups">Add to a group:</label>
+                <select name="addGroup" id="add-group">
+                    <optgroup label="Your groups">
+                        {{#each groups as |group|}}
+                            {{#unless (list_group_checker ../list.groups group.id)}}
+                            <option value="{{group.id}}">{{group.title}}</option>
+                            {{/unless}}
+                        {{/each}}
+                    </optgroup>
+                </select> 
+                <button id="group-submit-btn" class="btn btn-dark mx-1" data-list_id= "{{list.id}}" type="submit"> Submit </button>
+            </form>
         </div>
 
-
+        {{!-- items --}}
         <div class="col-9">
             <div class="card-deck">
                 <div class="row">
