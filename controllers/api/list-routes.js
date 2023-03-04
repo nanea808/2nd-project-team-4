@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
   try {
     const listData = await List.findByPk(req.params.id, {
       include: [
-        { model: User },
+        { model: User, attributes: {exclude: ['password']} },
         { model: Item },
         { model: Group, through: { model: GroupList } },
       ],
@@ -54,6 +54,10 @@ router.post("/", async (req, res) => {
         groupIds: [1,2,3]
     }
     */
+  if(req.body.user_id !== req.session.userID) {
+    res.status(401).json({ message: "Please log in as the user woh will own this list." });
+    return;
+  }
   List.create(req.body)
     // initializing a list with GroupLists is disabled to protect existing groups. Enable only for testing.
     /*

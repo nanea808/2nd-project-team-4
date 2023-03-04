@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         where: {
           id: req.session.userID,
         },
+       attributes: {exclude: ['password','email']}
       },
     }).catch((err) => {
       res.json(err);
@@ -61,8 +62,7 @@ router.get("/", async (req, res) => {
 router.get("/group/:id", async (req, res) => {
   const groupData = await Group.findByPk(req.params.id, {
     include: [
-      { model: User },
-      { model: User, through: { model: GroupUser } },
+      { model: User, through: { model: GroupUser }, attributes: {exclude: ['password','email']}},
       { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
   });
@@ -105,7 +105,7 @@ router.get("/list/:id", async (req, res) => {
   const listData = await List.findByPk(req.params.id, {
     include: [
       { model: Item },
-      { model: User },
+      { model: User, attributes: {exclude: ['password','email']} },
       { model: Group, through: { model: GroupList } },
     ],
   }).catch((err) => {
@@ -120,6 +120,7 @@ router.get("/list/:id", async (req, res) => {
         where: {
           id: req.session.userID,
         },
+         attributes: {exclude: ['password','email']}
       },
       // {
       //   model: List, through: {model: GroupList},

@@ -35,6 +35,7 @@ router.get("/:id", async (req, res) => {
         { model: Group },
         { model: Group, through: { model: GroupUser } },
       ],
+      attributes: {exclude: ['password']}
     });
 
     if (!userData) {
