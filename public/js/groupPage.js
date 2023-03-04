@@ -1,8 +1,8 @@
 $(() => {
-  const claimButtons = $(".claim-btn");
-
+  // Claim button function
   const clickHandler = function () {
     return function () {
+      // Simple if statement to toggle textContent
       this.textContent === "Claim"
         ? (this.textContent = "Unclaim")
         : (this.textContent = "Claim");
@@ -25,8 +25,7 @@ $(() => {
     }
   };
 
-  console.log(claimButtons);
-
-  claimButtons.click(clickHandler());
+  // event handler
+  $(".claim-btn").click(clickHandler());
   $(".list-group").children().click(showList);
 });

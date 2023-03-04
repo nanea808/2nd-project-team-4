@@ -3,6 +3,7 @@
   <h2 class="text-uppercase text-secondary">{{group.title}}</h2>
   <div class="d-grid gap-2 col-8 mx-auto">
     <ul class="list-group">
+      {{!-- List each user in selected group --}}
       {{#each group.users as |user|}}
         <li
           data-user="{{user.id}}"
@@ -16,9 +17,9 @@
     <span class="border-bottom border-black-50 border-3"></span>
   </div>
 
-  {{! Cards for items :) }}
-  {{! Title}}
+  {{! Container for item lists :) }}
   <div id="lists" class="col">
+    {{!-- Individual lists --}}
     {{#each group.lists as |list|}}
       <div data-owner="{{list.user_id}}" style="display: none">
         <h3 class="text-uppercase text-secondary">{{list.title}}</h3>
