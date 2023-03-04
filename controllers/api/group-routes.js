@@ -85,5 +85,31 @@ router.post('/', async (req, res) => {
 //add/remove requires security to confirm user owns group.
 
 //delete to delete a group
+router.delete("/:id", async (req, res) => {
+    try {
+      await GroupUser.destroy({
+        where: {group_id: req.params.id},
+      });
+      await GroupList.destroy({
+        where: {group_id: req.params.id},
+      });
+      const groupData = await Group.destroy({
+        where: [ 
+            { id: req.params.id },
+            {owning_user_id: req.session.userID}
+         ]
+      });
+  
+      if (!groupData) {
+        res.status(404).json({ message: "No groups with that id, or you don't own this group." });
+        return;
+      }
+  
+      res.status(200).json(groupData);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
 
 module.exports = router;

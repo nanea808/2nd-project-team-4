@@ -4,56 +4,66 @@
   <div class="d-grid gap-2 col-8 mx-auto">
     <ul class="list-group">
       {{#each group.users as |user|}}
-        {{#if user}}
-          <li
-            data-user="{{user.id}}"
-            class="list-group-item font-weight-bold text-center btn btn-success py-3" type="button"
-          >
-            {{user.username}}
-          </li>
-        {{/if}}
+        <li
+          data-user="{{user.id}}"
+          class="list-group-item font-weight-bold text-center btn btn-success py-3"
+          type="button"
+        >
+          {{user.username}}
+        </li>
       {{/each}}
     </ul>
     <span class="border-bottom border-black-50 border-3"></span>
   </div>
 
-{{! Cards for items :) }}
-{{! Title}}
-    <div id="lists" class="col">
-      {{#each group.lists as |list|}}
-        <div data-owner="{{list.user_id}}" style="display: none">
-          <h3 class="text-uppercase text-secondary">{{list.title}}</h3>
-          {{!-- item cards --}}
-          <div class="mx-auto">
-            <div class="card-deck">
-                <div class="row">
-                    {{!-- Items in list --}}
-                    {{#each list.items as |item|}}
-                    <div class="col-4 m-2">
-                        <div class="card align-items-center text-center g-3 shadow p-3 mb-5 bg-body rounded" style="width: 18rem">
-                            <div class="card-body">
-                                <h5 class="card-title ">{{item.title}}</h5>
-                                {{#if item.description}}
-                                    <p class="card-text">{{item.description}}</p>
-                                {{/if}}
-                                {{#if item.link}}
-                                    <a href="{{item.link}}" target="_blank" rel='external' class="card-link">Link to Product</a>
-                                {{/if}}
-                                <button type="button" data-item_id="{{item.id}}" class="btn btn-dark claim-btn">Claim</button>
-                                <button id="item-del-btn-{{item.id}}" type="button" data-item_id="{{item.id}}" class="btn btn-danger">X</button>
-                            </div>
-                        </div>
+  {{! Cards for items :) }}
+  {{! Title}}
+  <div id="lists" class="col">
+    {{#each group.lists as |list|}}
+      <div data-owner="{{list.user_id}}" style="display: none">
+        <h3 class="text-uppercase text-secondary">{{list.title}}</h3>
+        {{! item cards }}
+        <div class="mx-auto">
+          <div class="card-deck">
+            <div class="row">
+              {{! Items in list }}
+              {{#each list.items as |item|}}
+                <div class="col-4 m-2">
+                  <div
+                    class="card align-items-center text-center g-3 shadow p-3 mb-5 bg-body rounded"
+                    style="width: 18rem"
+                  >
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.title}}</h5>
+                      {{#if item.description}}
+                        <p class="card-text">{{item.description}}</p>
+                      {{/if}}
+                      {{#if item.link}}
+                        <a
+                          href="{{item.link}}"
+                          target="_blank"
+                          rel="external"
+                          class="card-link"
+                        >Link to Product</a>
+                      {{/if}}
+                      <button
+                        type="button"
+                        data-item_id="{{item.id}}"
+                        class="btn btn-dark claim-btn"
+                      >Claim</button>
                     </div>
-                    {{/each}}
-                    </div>
+                  </div>
+                </div>
+              {{/each}}
             </div>
           </div>
         </div>
-      {{/each}}
-    </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
-{{!-- Card class template --}}
-{{!-- 
+{{! Card class template }}
+{{! 
  <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
@@ -61,7 +71,6 @@
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
-</div> --}}
-
+</div> }}
 
 <script src="/js/groupPage.js"></script>

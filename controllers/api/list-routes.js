@@ -96,6 +96,12 @@ router.put("/:id", async (req, res) => {
 //delete to destroy a list
 router.delete("/:id", async (req, res) => {
   try {
+    await Item.destroy({
+      where: {list_id: req.params.id},
+    });
+    await GroupList.destroy({
+      where: {list_id: req.params.id},
+    });
     const listData = await List.destroy({
       where: { id: req.params.id },
     });
@@ -107,6 +113,7 @@ router.delete("/:id", async (req, res) => {
 
     res.status(200).json(listData);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

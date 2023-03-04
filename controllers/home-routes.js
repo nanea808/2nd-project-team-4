@@ -20,6 +20,18 @@ router.get("/", async (req, res) => {
     });
     const groups = groupData.map((group) => group.get({ plain: true }));
 
+    // Get owned groups based on logged in users ID
+    const ownedGroupData = await Group.findAll({
+      where: {
+        owning_user_id: req.session.userID,
+      },
+    }).catch((err) => {
+      res.json(err);
+    });
+    const ownedGroups = ownedGroupData.map((group) =>
+      group.get({ plain: true })
+    );
+
     // Get lists based on logged in users ID
     const listData = await List.findAll({
       where: {
@@ -30,7 +42,13 @@ router.get("/", async (req, res) => {
     });
     const lists = listData.map((list) => list.get({ plain: true }));
 
-    res.render("homepage", { groups, lists, loggedIn: req.session.loggedIn, user_id: req.session.userID });
+    res.render("homepage", {
+      groups,
+      lists,
+      ownedGroups,
+      loggedIn: req.session.loggedIn,
+      user_id: req.session.userID,
+    });
   } else {
     res.render("login");
   }
@@ -44,7 +62,7 @@ router.get("/", async (req, res) => {
 router.get("/group/:id", async (req, res) => {
   const groupData = await Group.findByPk(req.params.id, {
     include: [
-      { model: User },
+      { model: User},
       { model: User, through: { model: GroupUser } },
       { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
@@ -53,15 +71,22 @@ router.get("/group/:id", async (req, res) => {
 
   let user_belongs = false;
 
+  // checking if the user is a guest
   for (const user in group.users) {
     if (group.users[user].id === req.session.userID) {
       delete group.users[user];
       user_belongs = true;
     }
   }
+  
+  // checking if the user owns the group
+  if (group.owning_user_id === req.session.userID) {
+    user_belongs = true;
+  }
+
 
   if (!user_belongs) {
-    res.send("You dont own this group.");
+    res.send("You don't have access to this group.");
     return;
   }
 
@@ -94,21 +119,33 @@ router.get("/list/:id", async (req, res) => {
   const groupData = await Group.findAll({
     include: [
       {
-      model: User, through: { model: GroupUser },
-      where: {
-        id: req.session.userID,
-      }},
+        model: User,
+        through: { model: GroupUser },
+        where: {
+          id: req.session.userID,
+        },
+      },
       // {
       //   model: List, through: {model: GroupList},
       //   where: {
       //     list_id: req.params.id
       //   }
       // }
-    ]
+    ],
   }).catch((err) => {
     res.json(err);
   });
 
+  // Get owned groups based on logged in users ID
+  const ownedGroupData = await Group.findAll({
+    where: {
+      owning_user_id: req.session.userID,
+    },
+  }).catch((err) => {
+    res.json(err);
+  });
+
+  const ownedGroups = ownedGroupData.map((group) => group.get({ plain: true }));
   const groups = groupData.map((group) => group.get({ plain: true }));
   const list = listData.get({ plain: true });
 
@@ -116,7 +153,12 @@ router.get("/list/:id", async (req, res) => {
     res.send(`You don't have access to that list.`);
     return;
   } else {
-    res.render("listPage", { list, groups, loggedIn: req.session.loggedIn });
+    res.render("listPage", {
+      list,
+      groups,
+      ownedGroups,
+      loggedIn: req.session.loggedIn,
+    });
   }
 });
 
