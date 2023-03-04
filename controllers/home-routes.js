@@ -2,8 +2,7 @@ const { Op } = require("sequelize");
 const router = require("express").Router();
 const { User, List, Group, Item, GroupUser, GroupList } = require("../models");
 
-//homepage. Includes all groups a user is a part of, and all lists the user has made.
-//Page includes options to: login/logout, select a group, select a list, create a list/group, and delete a list/group.
+// homepage
 router.get("/", async (req, res) => {
   // Get groups based on logged in users ID
   if (req.session.loggedIn) {
@@ -62,7 +61,7 @@ router.get("/", async (req, res) => {
 router.get("/group/:id", async (req, res) => {
   const groupData = await Group.findByPk(req.params.id, {
     include: [
-      { model: User},
+      { model: User },
       { model: User, through: { model: GroupUser } },
       { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
@@ -78,12 +77,11 @@ router.get("/group/:id", async (req, res) => {
       user_belongs = true;
     }
   }
-  
+
   // checking if the user owns the group
   if (group.owning_user_id === req.session.userID) {
     user_belongs = true;
   }
-
 
   if (!user_belongs) {
     res.send("You don't have access to this group.");
@@ -97,9 +95,7 @@ router.get("/group/:id", async (req, res) => {
   });
 });
 
-//list page. Includes information on the list the user selected from the homepage, including the list title and all groups with access to the list.
-//users can add lists to groups that they're a part of.
-//users can create and delete items on the list.
+// list page
 router.get("/list/:id", async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect("/login");
@@ -152,16 +148,17 @@ router.get("/list/:id", async (req, res) => {
   if (req.session.userID !== list.user_id) {
     res.send(`You don't have access to that list.`);
     return;
-  } else {
-    res.render("listPage", {
-      list,
-      groups,
-      ownedGroups,
-      loggedIn: req.session.loggedIn,
-    });
   }
+
+  res.render("listPage", {
+    list,
+    groups,
+    ownedGroups,
+    loggedIn: req.session.loggedIn,
+  });
 });
 
+// login page
 router.get("/login", async (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");

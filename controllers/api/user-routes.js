@@ -3,22 +3,25 @@ const { User, List, Group, GroupUser } = require("../../models");
 
 // api/users endpoint
 
-router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      //include: all lists they own, all groups they're a part of, and all groups they own.
-      include: [
-        { model: List },
-        { model: Group },
-        { model: Group, through: { model: GroupUser } },
-      ],
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// get on all users disabled. Enable only for testing.
+/*
+  router.get("/", async (req, res) => {
+    try {
+      const userData = await User.findAll({
+        include: [
+          { model: List },
+          { model: Group },
+          { model: Group, through: { model: GroupUser } },
+        ],
+      });
+      res.status(200).json(userData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }); 
+*/
 
+// get on a user
 router.get("/:id", async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
@@ -33,6 +36,12 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "No user with that ID." });
       return;
     }
+
+    if(req.params.id !== JSON.stringify(req.session.userID)) {
+      res.status(500).json({message: "This is not you."});
+      return;
+    }
+
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
@@ -51,9 +60,11 @@ router.post("/", async (req, res) => {
         email: foo@bar.com,
         groupIds: [1,2,3]
     }
+    note: connecting through groupIds when posting a user is disabled to protect existing groups.
     */
   User.create(req.body)
-    .then((user) => {
+    /* GroupUser connection on user create is disabled to protect existing groups. Enable only for seeding or testing.
+      .then((user) => {
       if (req.body.groupIds) {
         const groupUserIdArr = req.body.groupIds.map((group_id) => {
           return {
@@ -64,7 +75,7 @@ router.post("/", async (req, res) => {
         GroupUser.bulkCreate(groupUserIdArr);
       }
       return user;
-    })
+    })*/
     .then((results) => {
       req.session.save(() => {
         req.session.userID = results.id;
