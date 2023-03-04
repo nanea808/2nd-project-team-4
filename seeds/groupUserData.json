@@ -2,11 +2,6 @@
     {
         "group_id":"1",
         "group_title":"Sarah's Birthday Party",
-        "user_id":"1"
-    },
-    {
-        "group_id":"1",
-        "group_title":"Sarah's Birthday Party",
         "user_id":"2"
     },
     {
@@ -18,11 +13,6 @@
         "group_id":"1",
         "group_title":"Sarah's Birthday Party",
         "user_id":"4"
-    },
-    {
-        "group_id":"2",
-        "group_title":"Sarah's Holiday Party",
-        "user_id":"1"
     },
     {
         "group_id":"2",
@@ -48,11 +38,6 @@
         "group_id":"3",
         "group_title":"Reg's Housewarming",
         "user_id":"1"
-    },
-    {
-        "group_id":"3",
-        "group_title":"Reg's Housewarming",
-        "user_id":"2"
     },
     {
         "group_id":"3",

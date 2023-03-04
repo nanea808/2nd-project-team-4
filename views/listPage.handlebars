@@ -27,10 +27,19 @@
             <form id="group-form" data-list_id="{{list.id}}" class="form-group form-group-sm">
                 <label for="groups">Add to a group:</label>
                 <select name="addGroup" id="add-group">
-                    <optgroup label="Your groups">
+                    <optgroup label="Owned groups">
+                        {{!-- owned groups --}}
+                        {{#each ownedGroups as |group|}}
+                            {{#unless (list_group_checker ../list.groups group.id)}}
+                                <option value="{{group.id}}">{{group.title}}</option>
+                            {{/unless}}
+                        {{/each}}
+                    </optgroup>
+                    <optgroup label="Guest groups"></optgroup>
+                        {{!-- guest groups --}}
                         {{#each groups as |group|}}
                             {{#unless (list_group_checker ../list.groups group.id)}}
-                            <option value="{{group.id}}">{{group.title}}</option>
+                                <option value="{{group.id}}">{{group.title}}</option>
                             {{/unless}}
                         {{/each}}
                     </optgroup>
