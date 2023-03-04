@@ -62,7 +62,7 @@ router.get("/", async (req, res) => {
 router.get("/group/:id", async (req, res) => {
   const groupData = await Group.findByPk(req.params.id, {
     include: [
-      { model: User },
+      { model: User},
       { model: User, through: { model: GroupUser } },
       { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
@@ -71,18 +71,22 @@ router.get("/group/:id", async (req, res) => {
 
   let user_belongs = false;
 
+  // checking if the user is a guest
   for (const user in group.users) {
-    if (
-      group.users[user].id === req.session.userID ||
-      group.owning_user_id === req.session.userID
-    ) {
+    if (group.users[user].id === req.session.userID) {
       delete group.users[user];
       user_belongs = true;
     }
   }
+  
+  // checking if the user owns the group
+  if (group.owning_user_id === req.session.userID) {
+    user_belongs = true;
+  }
+
 
   if (!user_belongs) {
-    res.send("You don't own this group.");
+    res.send("You don't have access to this group.");
     return;
   }
 
@@ -149,7 +153,12 @@ router.get("/list/:id", async (req, res) => {
     res.send(`You don't have access to that list.`);
     return;
   } else {
-    res.render("listPage", { list, groups, ownedGroups, loggedIn: req.session.loggedIn });
+    res.render("listPage", {
+      list,
+      groups,
+      ownedGroups,
+      loggedIn: req.session.loggedIn,
+    });
   }
 });
 
