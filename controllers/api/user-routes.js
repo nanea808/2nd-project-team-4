@@ -3,46 +3,53 @@ const { User, List, Group, GroupUser } = require("../../models");
 
 // api/users endpoint
 
-router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      //include: all lists they own, all groups they're a part of, and all groups they own.
-      include: [
-        { model: List },
-        { model: Group },
-        { model: Group, through: { model: GroupUser } },
-      ],
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// get on all users disabled. Enable only for testing.
+/*
+  router.get("/", async (req, res) => {
+    try {
+      const userData = await User.findAll({
+        include: [
+          { model: List },
+          { model: Group },
+          { model: Group, through: { model: GroupUser } },
+        ],
+      });
+      res.status(200).json(userData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }); 
+*/
 
+// get on a user
 router.get("/:id", async (req, res) => {
   try {
+    if (req.params.id !== JSON.stringify(req.session.userID)) {
+      res.status(401).json({ message: "Unauthorized user. Please log in as the correct user." });
+      return;
+    }
+    
     const userData = await User.findByPk(req.params.id, {
       include: [
         { model: List },
         { model: Group },
         { model: Group, through: { model: GroupUser } },
       ],
+      attributes: {exclude: ['password']}
     });
 
     if (!userData) {
       res.status(404).json({ message: "No user with that ID." });
       return;
     }
+
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// User login routes
-
 // Sign Up
-// post to create a user
 router.post("/", async (req, res) => {
   /*req.body should look something like this:
     {
@@ -51,9 +58,11 @@ router.post("/", async (req, res) => {
         email: foo@bar.com,
         groupIds: [1,2,3]
     }
-    */
+    note: connecting through groupIds when posting a user is disabled to protect existing groups.
+  */
   User.create(req.body)
-    .then((user) => {
+    // GroupUser connection on user create is disabled to protect existing groups. Enable only for seeding or testing.
+    /*  .then((user) => {
       if (req.body.groupIds) {
         const groupUserIdArr = req.body.groupIds.map((group_id) => {
           return {
@@ -64,7 +73,8 @@ router.post("/", async (req, res) => {
         GroupUser.bulkCreate(groupUserIdArr);
       }
       return user;
-    })
+      })
+    */
     .then((results) => {
       req.session.save(() => {
         req.session.userID = results.id;
@@ -91,18 +101,14 @@ router.post("/login", async (req, res) => {
     });
 
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password. Please try again! 1" });
+      res.status(400).json({ message: "Incorrect email or password. Please try again! 1" });
       return;
     }
 
     const passwordValid = userData.checkPassword(req.body.password);
 
     if (!passwordValid) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password. Please try again! 2" });
+      res.status(400).json({ message: "Incorrect email or password. Please try again! 2" });
       return;
     }
 
