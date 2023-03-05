@@ -30,10 +30,8 @@ Item.init(
       allowNull: false,
     },
     claimed_user: {
-      //unnasigned or user_id (shouldn't be necessary)
-      type: DataTypes.INTEGER,
-      defaultValue: "unassigned",
-      allowNull: false,
+      //unnasigned or user_id (foreign key shouldn't be necessary)
+      type: DataTypes.INTEGER
     },
     //list owning the item
     list_id: {

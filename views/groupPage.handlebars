@@ -51,6 +51,9 @@
                         type="button"
                         data-item_id="{{item.id}}"
                         data-claimed-user="{{item.claimed_user}}"
+                        {{!-- Logged in user not populating --}}
+                        data-logged-in-user="{{loggedIn}}"
+                        data-claimed-status="{{item.status}}"
                         class="btn btn-dark claim-btn"
                       >Claim</button>
                     </div>
