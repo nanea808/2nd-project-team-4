@@ -58,16 +58,16 @@
     }
   }
 
-  //add list to group
+  //add to a group
   async function addToGroup(event) {
     event.preventDefault();
 
     const group_id = $("#add-group").val();
     const list_id = $(this).data("list_id");
 
-    const response = await fetch("/api/groupList", {
-      method: "POST",
-      body: JSON.stringify({ list_id, group_id }),
+    const response = await fetch(`/api/lists/${list_id}`, {
+      method: "PUT",
+      body: `{"addedGroup": "${group_id}"}`,
       headers: { "Content-Type": "application/json" },
     });
 

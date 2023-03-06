@@ -96,6 +96,9 @@ router.put("/:id", async (req, res) => {
         where: { group_id: req.body.removedGroup, list_id: req.params.id },
       });
     }
+    if (req.body.addedGroup) {
+      await GroupList.create({group_id: req.body.addedGroup, list_id: req.params.id});
+    }
     if (req.body.title) {
       const listData = await List.update(
         { title: req.body.title },
@@ -103,7 +106,7 @@ router.put("/:id", async (req, res) => {
       );
       res.status(200).json(listData);
     } else
-      res.status(200).json({message: `group with ID ${req.body.removedGroup} removed from this list.`});
+      res.status(200).json({message: `group/list connections updated.`});
   } catch (err) {
     res.status(500).json(err);
   }
