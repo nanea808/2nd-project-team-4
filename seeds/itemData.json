@@ -17,7 +17,8 @@
         "title":"cardboard",
         "description":"for scratching",
         "link":"",
-        "status":"unassigned",
+        "status":"assigned",
+        "claimed_user": 3,
         "list_id":"4"
     },
     {
@@ -25,6 +26,7 @@
         "description":"to sit in",
         "link":"",
         "status":"purchased",
+        "claimed_user": 1,
         "list_id":"4"
     },
     {
