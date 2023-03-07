@@ -42,6 +42,24 @@ $(() => {
     }
   }
 
+    //remove from a group
+    async function updateUsers(event) {
+      event.preventDefault();
+      const group_id = $(this).data("group_id");
+      const user_id = $(this).data("user_id");
+      const response = await fetch(`/api/groups/${group_id}`, {
+        method: "PUT",
+        body: `{"removedUser": "${user_id}"}`,
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert("Failed to delete from a group.");
+      }
+    }
+
   function showGroupTitleForm() {
     $("#groupFormDiv").removeClass("visually-hidden");
   }
@@ -52,4 +70,5 @@ $(() => {
   $(".list-group").children().click(showList);
   $("#group-title-form").submit(changeGroupTitle);
   $("#group-title-btn").click(showGroupTitleForm);
+  $("button[id^='user-del-btn']").click(updateUsers);
 });

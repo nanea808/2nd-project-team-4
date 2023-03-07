@@ -42,7 +42,7 @@
         </li>
         {{#if (test_ownership ../group.owning_user_id ../userID)}}
           <button type="button" id="user-del-btn-{{user.id}}" data-user_id="{{user.id}}" 
-          data-group_id="{{group.id}}" class="btn btn-danger">Remove User</button>
+          data-group_id="{{../group.id}}" class="btn btn-danger">Remove User</button>
         {{/if}}
       {{/each}}
     </ul>
