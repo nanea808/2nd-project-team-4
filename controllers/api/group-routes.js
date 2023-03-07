@@ -43,11 +43,6 @@ router.get('/:id', async (req,res) => {
             return;
         }
 
-        if(!group) {
-            res.status(404).json({message: 'No group with that ID.'});
-            return;
-        }
-
         res.status(200).json(group);
     } catch (err) {
         res.status(500).json(err);
@@ -111,7 +106,6 @@ router.put("/:id", async (req, res) => {
             { model: List, through: { model: GroupList }},
           ],
       });
-      console.log(`--------------------${JSON.stringify(thisGroup)}------------------------`);
       if(!thisGroup) {
         res.status(404).json({message: "There are no groups with that ID."});
         return;
@@ -122,16 +116,16 @@ router.put("/:id", async (req, res) => {
       }
   
       if (req.body.removedUser) {
-        // destroy all GroupUser connections
         await GroupUser.destroy({
             where: { group_id: req.params.id, user_id: req.body.removedUser },
           });
-        // destroy all GroupList connections where the list.user_id is the removedUser
-        // for (let index = 0; index < doomedLists.length; index++) {
-        //     await GroupList.destroy({
-        //         where: { group_id: req.params.id, list_id: }
-        //     });
-        // }
+        for (let index = 0; index < thisGroup.lists.length; index++) {
+            if(thisGroup.lists[index].user_id === req.body.removedUser) {
+                await GroupList.destroy({
+                    where: { group_id: req.params.id, list_id: thisGroup.lists[index].id}
+                });
+            }
+        }
       }
       if (req.body.addedUser) {
         await GroupUser.create({group_id: req.body.addedGroup, list_id: req.params.id});
