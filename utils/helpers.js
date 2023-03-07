@@ -20,5 +20,10 @@ module.exports = {
             user_belongs = true;
         }
         return user_belongs;
+    },
+
+    test_ownership: (actualOwner, testingId) => {
+        if(actualOwner === testingId) return true;
+        return false;
     }
 };

@@ -76,12 +76,21 @@ router.get("/group/:id", async (req, res) => {
     res.send("You don't have access to this group.");
     return;
   }
+  
+  for (const user in group.users) {
+    if (group.users[user].id === req.session.userID) {
+      delete group.users[user];
+    }
+  }
 
   const ownerData = await User.findByPk(group.owning_user_id, {
       attributes: {exclude: ['password']}
     
   });
   let owner = ownerData.get({plain: true});
+  if(group.owning_user_id === req.session.userID) {
+    owner = 0;
+  }
 
   res.render("groupPage", {
     group,

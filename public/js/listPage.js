@@ -81,7 +81,6 @@
   //change a list's title
   async function changeListTitle(event) {
     event.preventDefault();
-    alert('test');
     const list_id = $(this).data("list_id");
     const newTitle = $('#new-list-title').val().trim();
     const response = await fetch(`/api/lists/${list_id}`, {
