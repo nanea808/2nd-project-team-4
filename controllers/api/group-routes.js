@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {User, List, Group, GroupUser, GroupList} = require('../../models');
+const { check_user_group_access } = require('../../utils/helpers');
 
 // api/groups endpoint
 
@@ -31,25 +32,24 @@ router.get('/:id', async (req,res) => {
             ]
         });
 
-        let user_belongs = false;
-        for (const user in groupData.users) {
-            if (groupData.users[user].id === req.session.userID) {
-              user_belongs = true;
-            }
-        }
-        if (groupData.owning_user_id === req.session.userID) {
-            user_belongs = true;
-        }
-        if(!user_belongs) {
-            res.status(401).json({ message: "This is not your group. Please log in as the group's owner." });
-            return;
-        }
-
         if(!groupData) {
             res.status(404).json({message: 'No group with that ID.'});
             return;
         }
-        res.status(200).json(groupData);
+
+        let group = groupData.get({ plain: true });
+
+        if(!check_user_group_access(group, req.session.userID)) {
+            res.status(401).json({ message: "You don't have access to this group." });
+            return;
+        }
+
+        if(!group) {
+            res.status(404).json({message: 'No group with that ID.'});
+            return;
+        }
+
+        res.status(200).json(group);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -104,13 +104,12 @@ router.post('/', async (req, res) => {
   });
 
 //put to update a group (change name, add/remove users.)
-//add/remove requires security to confirm user owns group.
 
 //delete to delete a group
 router.delete("/:id", async (req, res) => {
     try {
-      const thisGroup = await Group.findByPk(req.params.id);
-      if(thisGroup.owning_user_id !== req.session.userID) {
+      const thisGroupData = await Group.findByPk(req.params.id);
+      if(thisGroupData.owning_user_id !== req.session.userID) {
         res.status(401).json({ message: "This is not your group. Please log in as the group's owner." });
         return;
       }

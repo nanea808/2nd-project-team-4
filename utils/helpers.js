@@ -8,4 +8,17 @@ module.exports = {
         }
         return false;
     },
+
+    check_user_group_access: (groupData, user_id) => {
+        let user_belongs = false;
+        for (const user in groupData.users) {
+            if (groupData.users[user].id === user_id) {
+              user_belongs = true;
+            }
+        }
+        if (groupData.owning_user_id === user_id) {
+            user_belongs = true;
+        }
+        return user_belongs;
+    }
 };
