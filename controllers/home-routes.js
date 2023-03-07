@@ -67,21 +67,25 @@ router.get("/group/:id", async (req, res) => {
       { model: List, through: { model: GroupList }, include: { model: Item } },
     ],
   });
-
   if(!groupData) {
     res.send('No group with that ID.');
     return;
   }
-
   let group = groupData.get({ plain: true });
-
   if(!check_user_group_access(group, req.session.userID)) {
     res.send("You don't have access to this group.");
     return;
   }
 
+  const ownerData = await User.findByPk(group.owning_user_id, {
+      attributes: {exclude: ['password']}
+    
+  });
+  let owner = ownerData.get({plain: true});
+
   res.render("groupPage", {
     group,
+    owner,
     loggedIn: req.session.loggedIn,
     userID: req.session.userID,
   });

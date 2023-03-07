@@ -11,7 +11,6 @@ const { check_user_group_access } = require('../../utils/helpers');
             const groupData = await Group.findAll({
                 //include: the owner of the group, the members of the group, the lists in each group
                 include: [
-                    {model: User},
                     {model: User, through: {model: GroupUser}},
                     {model: List, through: {model: GroupList}}
                 ]
@@ -104,6 +103,51 @@ router.post('/', async (req, res) => {
   });
 
 //put to update a group (change name, add/remove users.)
+router.put("/:id", async (req, res) => {
+    try {
+      const thisGroup = await Group.findByPk(req.params.id, {
+        include: [
+            { model: User, through: { model: GroupUser }, attributes: {exclude: ['password','email']}},
+            { model: List, through: { model: GroupList }},
+          ],
+      });
+      console.log(`--------------------${JSON.stringify(thisGroup)}------------------------`);
+      if(!thisGroup) {
+        res.status(404).json({message: "There are no groups with that ID."});
+        return;
+      }
+      if(thisGroup.owning_user_id !== req.session.userID) {
+        res.status(401).json({message: "You don't own this group. Please log in as the correct user."});
+        return;
+      }
+  
+      if (req.body.removedUser) {
+        // destroy all GroupUser connections
+        await GroupUser.destroy({
+            where: { group_id: req.params.id, user_id: req.body.removedUser },
+          });
+        // destroy all GroupList connections where the list.user_id is the removedUser
+        // for (let index = 0; index < doomedLists.length; index++) {
+        //     await GroupList.destroy({
+        //         where: { group_id: req.params.id, list_id: }
+        //     });
+        // }
+      }
+      if (req.body.addedUser) {
+        await GroupUser.create({group_id: req.body.addedGroup, list_id: req.params.id});
+      }
+      if (req.body.newTitle) {
+        const groupData = await Group.update(
+          { title: req.body.newTitle },
+          { where: { id: req.params.id } }
+        );
+        res.status(200).json(groupData);
+      } else
+        res.status(200).json({message: `Group users and lists updated.`});
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 //delete to delete a group
 router.delete("/:id", async (req, res) => {
