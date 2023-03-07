@@ -120,15 +120,31 @@ router.put("/:id", async (req, res) => {
             where: { group_id: req.params.id, user_id: req.body.removedUser },
           });
         for (let index = 0; index < thisGroup.lists.length; index++) {
-            if(thisGroup.lists[index].user_id === req.body.removedUser) {
+            if(thisGroup.lists[index].user_id == req.body.removedUser) {
                 await GroupList.destroy({
                     where: { group_id: req.params.id, list_id: thisGroup.lists[index].id}
                 });
             }
         }
       }
-      if (req.body.addedUser) {
-        await GroupUser.create({group_id: req.body.addedGroup, list_id: req.params.id});
+      if (req.body.newUser) {
+        let userData = await User.findOne({
+          where: {
+            email: req.body.newUser
+          },
+        });
+        if(!userData) {
+          res.status(400).json({message: 'no user found with that email.'});
+          return;
+        }
+        const user = userData.get({ plain: true });
+        for (let index = 0; index < thisGroup.users.length; index++) {
+          if(thisGroup.users[index].id === user.id) {
+            res.status(400).json({message: 'This user is already part of your group.'});
+            return;
+          }
+        }
+        await GroupUser.create({group_id: req.params.id, user_id: user.id});
       }
       if (req.body.newTitle) {
         const groupData = await Group.update(

@@ -2,8 +2,7 @@
 <div class="container-fluid bg-light bg-gradient">
   <h2 class="text-uppercase text-secondary">{{group.title}}</h2>
   {{#if (test_ownership group.owning_user_id userID)}}
-    <button type="button" id="group-title-btn" class="btn btn-dark mx-1">Change
-      title</button>
+    <button type="button" id="group-title-btn" class="btn btn-dark mx-1">Change title</button>
     <div class="container-fluid text-center visually-hidden" id="groupFormDiv">
       <form id="group-title-form" data-group_id="{{group.id}}">
         <input
@@ -16,6 +15,23 @@
           type="submit"
           class="btn btn-dark"
           id="group-title-save-btn"
+        >Save</button>
+      </form>
+    </div>
+
+    <button type="button" id="add-user-btn" class="btn btn-dark mx-1">Add user by email</button>
+    <div class="container-fluid text-center visually-hidden" id="userFormDiv">
+      <form id="new-user-form" data-group_id="{{group.id}}">
+        <input
+          type="text"
+          id="new-email"
+          class="form-control"
+          placeholder="email"
+        />
+        <button
+          type="submit"
+          class="btn btn-dark"
+          id="new-user-save-btn"
         >Save</button>
       </form>
     </div>
