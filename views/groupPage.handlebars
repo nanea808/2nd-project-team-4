@@ -65,9 +65,9 @@
     <span class="border-bottom border-black-50 border-3"></span>
   </div>
 
-  {{! Cards for items :) }}
-  {{! Title}}
-  <div id="lists" class="col">
+  {{! Container for item lists :) }}
+  <div id="lists" data-logged-in-user="{{userID}}" class="col">
+    {{!-- Individual lists --}}
     {{#each group.lists as |list|}}
       <div data-owner="{{list.user_id}}" style="display: none">
         <h3 class="text-uppercase text-secondary">{{list.title}}</h3>
@@ -98,6 +98,9 @@
                       <button
                         type="button"
                         data-item_id="{{item.id}}"
+                        data-claimed-user="{{item.claimed_user}}"
+                        {{!-- Logged in user not populating --}}
+                        data-claimed-status="{{item.status}}"
                         class="btn btn-dark claim-btn"
                       >Claim</button>
                     </div>

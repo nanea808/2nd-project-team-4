@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Item extends Model {}
 
@@ -16,27 +16,30 @@ Item.init(
       allowNull: false,
     },
     description: {
-        //optional
-        type: DataTypes.TEXT
+      //optional
+      type: DataTypes.TEXT,
     },
     link: {
-        //optional
-        type: DataTypes.STRING
+      //optional
+      type: DataTypes.STRING,
     },
     status: {
-        //unassigned, assigned, purchased
-        type: DataTypes.STRING,
-        defaultValue: "unassigned",
-        allowNull: false
+      //unassigned, assigned, purchased
+      type: DataTypes.STRING,
+      defaultValue: "unassigned",
+      allowNull: false,
     },
-
+    claimed_user: {
+      //unnasigned or user_id (foreign key shouldn't be necessary)
+      type: DataTypes.INTEGER
+    },
     //list owning the item
     list_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'list',
-        key: 'id'
-      }
+        model: "list",
+        key: "id",
+      },
     },
   },
   {
@@ -44,7 +47,7 @@ Item.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'item',
+    modelName: "item",
   }
 );
 
