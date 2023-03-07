@@ -1,7 +1,7 @@
 $(() => {
   const claimButtons = $(".claim-btn");
-
-  console.log(claimButtons);
+  const loggedInUserId = $('#lists').attr("data-logged-in-user");
+  console.log(loggedInUserId);
 
   // Claim button function
   const clickHandler = function () {
@@ -34,16 +34,16 @@ $(() => {
       // Loop through buttons and mark as claimed when user is clicked
       for (const button of claimButtons) {
         if (button.dataset.claimedUser) {
-          console.log(button.dataset.claimedStatus);
+          console.log(button.dataset.claimedStatus + button.dataset.claimedUser);
           if ( // If item is claimed and purchased by logged in user 
-            button.dataset.loggedInUser === button.dataset.claimedUser &&
+            loggedInUserId === button.dataset.claimedUser &&
             button.dataset.claimedStatus === "purchased"
           ) {
             // Then don't allow user to unclaim item
             button.disabled = true;
             button.textContent = "Purchased";
           } else if ( // If item is claimed by logged in user but not purchased yet
-            button.dataset.loggedInUser === button.dataset.claimedUser &&
+            loggedInUserId === button.dataset.claimedUser &&
             button.dataset.claimedStatus === "assigned"
           ) {
             // Then allow user to unclaim item
