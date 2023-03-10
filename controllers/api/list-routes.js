@@ -35,11 +35,12 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "No list with that ID." });
       return;
     }
-    if (listData.user_id !== req.session.userID) {
+    const list = listData.get({ plain: true });
+    if (list.user_id !== req.session.userID) {
       res.status(401).json({message: "This is not your list. Please log in as the correct user."});
       return;
     }
-    res.status(200).json(listData);
+    res.status(200).json(list);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -86,6 +87,10 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const thisList = await List.findByPk(req.params.id);
+    if(!thisList) {
+      res.status(404).json({message: "There are no lists with that ID."});
+      return;
+    }
     if(thisList.user_id !== req.session.userID) {
       res.status(401).json({message: "This is not your list. Please log in as the correct user."});
       return;
@@ -96,6 +101,9 @@ router.put("/:id", async (req, res) => {
         where: { group_id: req.body.removedGroup, list_id: req.params.id },
       });
     }
+    if (req.body.addedGroup) {
+      await GroupList.create({group_id: req.body.addedGroup, list_id: req.params.id});
+    }
     if (req.body.title) {
       const listData = await List.update(
         { title: req.body.title },
@@ -103,7 +111,7 @@ router.put("/:id", async (req, res) => {
       );
       res.status(200).json(listData);
     } else
-      res.status(200).json({message: `group with ID ${req.body.removedGroup} removed from this list.`});
+      res.status(200).json({message: `group/list connections updated.`});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -113,7 +121,11 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const thisList = await List.findByPk(req.params.id);
-
+    
+    if(!thisList) {
+      res.status(404).json({message: "No lists with that id."});
+      return;
+    }
     if(thisList.user_id !== req.session.userID) {
       res.status(401).json({message: "This is not your list. Please log in as the correct user."});
       return;
@@ -128,11 +140,6 @@ router.delete("/:id", async (req, res) => {
     const listData = await List.destroy({
       where: { id: req.params.id },
     });
-
-    if (!listData) {
-      res.status(404).json({ message: "No lists with that id." });
-      return;
-    }
 
     res.status(200).json(listData);
   } catch (err) {
