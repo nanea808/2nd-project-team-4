@@ -8,8 +8,10 @@ $(() => {
     return function () {
       // Simple if statement to toggle textContent
       if (this.textContent === "Claim") {
+        // Api put request to api/items/this.dataset.item_id
         this.textContent = "Unclaim";
       } else if (this.textContent === "Unclaim") {
+        // Api put request to api/items/this.dataset.item_id
         this.textContent = "Claim";
       }
     };
