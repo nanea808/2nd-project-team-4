@@ -5,14 +5,42 @@ $(() => {
 
   // Claim button function
   const clickHandler = function () {
-    return function () {
+    return async function () {
       // Simple if statement to toggle textContent
       if (this.textContent === "Claim") {
         // Api put request to api/items/this.dataset.item_id
-        this.textContent = "Unclaim";
+        console.log({ dataset: this.dataset, user_id: loggedInUserId })
+
+        const response = await fetch(`/api/items/${this.dataset.item_id}`, {
+          method: "PUT",
+          body: JSON.stringify({ status: "assigned", user_id: loggedInUserId }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          alert("Item claimed!")
+          this.textContent = "Unclaim";
+        } else {
+          alert("Could not claim item. Please try again.")
+          return;
+        }
       } else if (this.textContent === "Unclaim") {
         // Api put request to api/items/this.dataset.item_id
-        this.textContent = "Claim";
+        const response = await fetch(`/api/items/${this.dataset.item_id}`, {
+          method: "PUT",
+          body: JSON.stringify({ status: "unassigned", user_id: null }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          alert("Item unclaimed!")
+          this.textContent = "Claim";
+        } else {
+          alert("Could not unclaim item. Please try again.")
+          return;
+        }
+
+        
       }
     };
   };

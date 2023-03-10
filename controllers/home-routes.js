@@ -91,7 +91,7 @@ router.get("/group/:id", async (req, res) => {
   res.render("groupPage", {
     group,
     loggedIn: req.session.loggedIn,
-    userID: req.session.userID,
+    user_id: req.session.userID,
   });
 });
 

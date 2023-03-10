@@ -61,17 +61,18 @@ router.post("/", async (req, res) => {
 // Update items for claim function
 router.put("/:id", async (req, res) => {
   try {
-    // Check if user updating the item is the logged in user
-    if (req.body.user_id !== req.session.userID) {
+    // Check if user claiming or unclaiming the item is the logged in user
+    if (req.body.user_id != req.session.userID && req.body.user_id !== null) {
       req.status(401).json({
-        message: "This is not your list. Please log in as the correct user.",
+        message: "You are not the user claiming this item. Please log in as the correct user.",
       });
       return;
     }
-
+    
+    // Note: add verification to the model
     if (req.body.status) {
-      const itemData = await List.update(
-        { status: req.body.status },
+      const itemData = await Item.update(
+        { status: req.body.status, claimed_user: req.body.user_id },
         { where: { id: req.params.id } }
       );
       res.status(200).json(itemData);
