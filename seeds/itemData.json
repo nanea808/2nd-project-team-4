@@ -3,14 +3,14 @@
         "title":"usb-c headset adaptor",
         "description":"this is a description!!!! Hi!!! I really want this!!!",
         "link":"amazon.com/findThis",
-        "status":"assigned",
+        "status":"unassigned",
         "list_id":"1"
     },
     {
         "title":"catnip",
         "description":"it's good for my cat",
         "link":"petsmart.com",
-        "status":"purchased",
+        "status":"unassigned",
         "list_id":"3"
     },
     {
@@ -34,6 +34,7 @@
         "description":"",
         "link":"",
         "status":"purchased",
+        "claimed_user": 2,
         "list_id":"2"
     },
     {
@@ -62,6 +63,7 @@
         "description":"it's a brand new car!!!",
         "link":"toyota.com",
         "status":"assigned",
+        "claimed_user": 3,
         "list_id":"1"
     },
     {
@@ -69,6 +71,7 @@
         "description":"for chasing",
         "link":"none",
         "status":"assigned",
+        "claimed_user": 3,
         "list_id":"3"
     },
     {
@@ -76,6 +79,7 @@
         "description": "for honing my claws",
         "link": "none",
         "status": "purchased",
+        "claimed_user": 3,
         "list_id": "3"
     },
     {

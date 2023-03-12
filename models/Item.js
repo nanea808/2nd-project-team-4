@@ -25,13 +25,15 @@ Item.init(
     },
     status: {
       //unassigned, assigned, purchased
+      // Needs Verification
       type: DataTypes.STRING,
       defaultValue: "unassigned",
       allowNull: false,
     },
     claimed_user: {
-      //unnasigned or user_id (foreign key shouldn't be necessary)
-      type: DataTypes.INTEGER
+      //null or user_id (foreign key shouldn't be necessary)
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     //list owning the item
     list_id: {

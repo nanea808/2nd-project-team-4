@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const {List, Item} = require('../../models');
+const router = require("express").Router();
+const { List, Item } = require("../../models");
 
 // api/items endpoint
 
@@ -17,11 +17,11 @@ const {List, Item} = require('../../models');
   });
 */
 
-router.get('/:id', async (req,res) => {
-    try {
-        const itemData = await Item.findByPk(req.params.id, {
-            include: [{model: List}]
-        });
+router.get("/:id", async (req, res) => {
+  try {
+    const itemData = await Item.findByPk(req.params.id, {
+      include: [{ model: List }],
+    });
 
         if(!itemData) {
             res.status(404).json({message: 'No item with that ID.'});
@@ -76,6 +76,30 @@ router.delete('/:id', async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
+
+// Update items for claim function
+router.put("/:id", async (req, res) => {
+  try {
+    // Check if user claiming or unclaiming the item is the logged in user
+    if (req.body.user_id != req.session.userID && req.body.user_id !== null) {
+      req.status(401).json({
+        message: "You are not the user claiming this item. Please log in as the correct user.",
+      });
+      return;
+    }
+    
+    // Note: add verification to the model
+    if (req.body.status) {
+      const itemData = await Item.update(
+        { status: req.body.status, claimed_user: req.body.user_id },
+        { where: { id: req.params.id } }
+      );
+      res.status(200).json(itemData);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

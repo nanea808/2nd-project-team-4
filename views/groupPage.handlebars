@@ -1,7 +1,7 @@
 {{! List those peeps! }}
 <div class="container-fluid bg-light bg-gradient">
   <h2 class="text-uppercase text-secondary">{{group.title}}</h2>
-  {{#if (test_ownership group.owning_user_id userID)}}
+  {{#if (test_ownership group.owning_user_id user_id)}}
     <button type="button" id="group-title-btn" class="btn btn-dark mx-1">Change title</button>
     <div class="container-fluid text-center visually-hidden" id="groupFormDiv">
       <form id="group-title-form" data-group_id="{{group.id}}">
@@ -56,7 +56,7 @@
         >
           {{user.username}}
         </li>
-        {{#if (test_ownership ../group.owning_user_id ../userID)}}
+        {{#if (test_ownership ../group.owning_user_id ../user_id)}}
           <button type="button" id="user-del-btn-{{user.id}}" data-user_id="{{user.id}}" 
           data-group_id="{{../group.id}}" class="btn btn-danger">Remove User</button>
         {{/if}}
@@ -66,7 +66,7 @@
   </div>
 
   {{! Container for item lists :) }}
-  <div id="lists" data-logged-in-user="{{userID}}" class="col">
+  <div id="lists" data-logged-in-user="{{user_id}}" class="col">
     {{!-- Individual lists --}}
     {{#each group.lists as |list|}}
       <div data-owner="{{list.user_id}}" style="display: none">
