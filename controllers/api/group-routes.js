@@ -126,13 +126,8 @@ router.put("/:id", async (req, res) => {
     let owner = false;
     if (thisGroup.owning_user_id === req.session.userID) {
       owner = true;
-    } else if (req.body.removedUser !== req.session.userID) {
-      res
-        .status(401)
-        .json({
-          message:
-            "You can't change this group. Please log in as the correct user.",
-        });
+    } else if (req.body.removedUser != req.session.userID) {
+      res.status(401).json({message:"You can't change this group. Please log in as the correct user."});
       return;
     }
 

@@ -35,6 +35,8 @@
         >Save</button>
       </form>
     </div>
+  {{else}}
+    <button type="button" id="user-del-btn-{{user_id}}" data-user_id="{{user_id}}" data-group_id="{{group.id}}" class="btn btn-danger">Leave Group</button>
   {{/if}}
   <div class="d-grid gap-2 col-8 mx-auto">
     <ul class="list-group">
