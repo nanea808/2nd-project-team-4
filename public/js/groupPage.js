@@ -1,6 +1,6 @@
 $(() => {
   const claimButtons = $(".claim-btn");
-  const loggedInUserId = $('#lists').attr("data-logged-in-user");
+  const loggedInUserId = $("#lists").attr("data-logged-in-user");
   console.log(loggedInUserId);
 
   // Claim button function
@@ -9,7 +9,7 @@ $(() => {
       // Simple if statement to toggle textContent
       if (this.textContent === "Claim") {
         // Api put request to api/items/this.dataset.item_id
-        console.log({ dataset: this.dataset, user_id: loggedInUserId })
+        console.log({ dataset: this.dataset, user_id: loggedInUserId });
 
         const response = await fetch(`/api/items/${this.dataset.item_id}`, {
           method: "PUT",
@@ -18,10 +18,10 @@ $(() => {
         });
 
         if (response.ok) {
-          alert("Item claimed!")
+          alert("Item claimed!");
           this.textContent = "Unclaim";
         } else {
-          alert("Could not claim item. Please try again.")
+          alert("Could not claim item. Please try again.");
           return;
         }
       } else if (this.textContent === "Unclaim") {
@@ -33,14 +33,12 @@ $(() => {
         });
 
         if (response.ok) {
-          alert("Item unclaimed!")
+          alert("Item unclaimed!");
           this.textContent = "Claim";
         } else {
-          alert("Could not unclaim item. Please try again.")
+          alert("Could not unclaim item. Please try again.");
           return;
         }
-
-        
       }
     };
   };
@@ -64,15 +62,19 @@ $(() => {
       // Loop through buttons and mark as claimed when user is clicked
       for (const button of claimButtons) {
         if (button.dataset.claimedUser) {
-          console.log(button.dataset.claimedStatus + button.dataset.claimedUser);
-          if ( // If item is claimed and purchased by logged in user 
+          console.log(
+            button.dataset.claimedStatus + button.dataset.claimedUser
+          );
+          if (
+            // If item is claimed and purchased by logged in user
             loggedInUserId === button.dataset.claimedUser &&
             button.dataset.claimedStatus === "purchased"
           ) {
             // Then don't allow user to unclaim item
             button.disabled = true;
             button.textContent = "Purchased";
-          } else if ( // If item is claimed by logged in user but not purchased yet
+          } else if (
+            // If item is claimed by logged in user but not purchased yet
             loggedInUserId === button.dataset.claimedUser &&
             button.dataset.claimedStatus === "assigned"
           ) {
@@ -92,7 +94,7 @@ $(() => {
   async function changeGroupTitle(event) {
     event.preventDefault();
     const group_id = $(this).data("group_id");
-    const newTitle = $('#new-group-title').val().trim();
+    const newTitle = $("#new-group-title").val().trim();
     const response = await fetch(`/api/groups/${group_id}`, {
       method: "PUT",
       body: `{"newTitle": "${newTitle}"}`,
@@ -106,29 +108,29 @@ $(() => {
     }
   }
 
-    // remove user
-    async function removeUser(event) {
-      event.preventDefault();
-      const group_id = $(this).data("group_id");
-      const user_id = $(this).data("user_id");
-      const response = await fetch(`/api/groups/${group_id}`, {
-        method: "PUT",
-        body: `{"removedUser": "${user_id}"}`,
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (response.ok) {
-        location.reload();
-      } else {
-        alert("Failed to delete from a group.");
-      }
+  // remove user
+  async function removeUser(event) {
+    event.preventDefault();
+    const group_id = $(this).data("group_id");
+    const user_id = $(this).data("user_id");
+    const response = await fetch(`/api/groups/${group_id}`, {
+      method: "PUT",
+      body: `{"removedUser": "${user_id}"}`,
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      location.reload();
+    } else {
+      alert("Failed to delete from a group.");
     }
+  }
 
   // add user
   async function addUser(event) {
     event.preventDefault();
     const group_id = $(this).data("group_id");
-    const email = $('#new-email').val().trim();
+    const email = $("#new-email").val().trim();
     const response = await fetch(`/api/groups/${group_id}`, {
       method: "PUT",
       body: `{"newUser": "${email}"}`,
@@ -138,7 +140,9 @@ $(() => {
     if (response.ok) {
       location.reload();
     } else {
-      alert("Failed to add a user. Please confirm the email address is correct.");
+      alert(
+        "Failed to add a user. Please confirm the email address is correct."
+      );
     }
   }
 
