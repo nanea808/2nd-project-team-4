@@ -73,7 +73,7 @@ router.get("/group/:id", async (req, res) => {
   }
   let group = groupData.get({ plain: true });
   if(!check_user_group_access(group, req.session.userID)) {
-    res.send("You don't have access to this group.");
+    res.redirect("/");
     return;
   }
   
